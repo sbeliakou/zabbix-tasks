@@ -1,33 +1,37 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.define "zabbix_server" do |server|
-    server.vm.hostname = "server"
-    server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    server.vm.network "forwarded_port", guest: 80, host: 8080
-    server.vm.network "private_network", ip: "192.168.56.10"
-    server.vm.provider "virtualbox" do |vb|
-      vb.name = "Zabbix Server"
-      vb.memory = "1024"
-    end
+  config.vm.define "srv-zabbix" do |server|
+   server.vm.define "srv-zabbix"
+   server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+   #server.vm.box = "centos73-min.box"
+   server.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
+   #server.vm.box_url = "centos73-min.box"
+   server.vm.hostname = "srv-zabbix"
+   server.vm.network "private_network", ip: "192.168.56.105"
+   server.vm.provider "virtualbox" do |vb|
+     vb.memory = "2048"
+   end
 
-    server.vm.provision "shell", path: "scripts/server.sh"
-    server.vm.provision "shell", path: "scripts/agent.sh"
+   server.vm.provision "shell", path: "scripts/server.sh"
+   server.vm.provision "shell", path: "scripts/agent.sh"
 
-  end
+ end
+#client
+  config.vm.define "zabbix-client" do |client|
+   client.vm.define "zabbix-client"
+   server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+   #server.vm.box = "centos73-min.box"
+   server.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
+   #server.vm.box_url = "centos73-min.box"
+   client.vm.hostname = "zabbix-client"
+   client.vm.network "private_network", ip: "192.168.56.106"
+   client.vm.provider "virtualbox" do |vb|
+     vb.memory = "1024"
+   end
 
-  config.vm.define "host1" do |host1|
-    host1.vm.hostname = "host-agent1"
-    host1.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    host1.vm.network "private_network", ip: "192.168.56.11"
-    host1.vm.provider "virtualbox" do |vb|
-      vb.name = "Host1"
-      vb.memory = "1024"
-    end
+    client.vm.provision "shell", path: "scripts/agent.sh"
 
-    host1.vm.provision "shell", path: "scripts/agent.sh"
+ end
 
-  end
 
 end
