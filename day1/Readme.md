@@ -55,18 +55,7 @@ For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 2. Using Zabbix UI:
 Configure “Network discovery” so that, 2nd VM will be joined to Zabbix (group “Project Hosts”, Template “Template OS Linux”)
 
-<img src="pictures/Screenshot from 2017-07-24 20-35-40.png">
-
-<img src="pictures/Screenshot from 2017-07-24 20-35-50.png">
-
-<img src="pictures/Screenshot from 2017-07-24 20-35-31.png">
-
-<img src="pictures/Screenshot from 2017-07-24 20-35-10.png">
-
-
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
-
-
 
 # Task 2. Zabbix Tools
 Testing Infrastructure:
