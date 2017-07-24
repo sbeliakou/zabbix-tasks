@@ -51,14 +51,14 @@ You should install and configure Zabbix server and agents.
 
 <img src="pictures/Screenshot from 2017-07-24 21-00-00.png">
 
-<img src="pictures/Screenshot from 2017-07-24 21-00-20.png">
-
-<img src="pictures/Screenshot from 2017-07-24 21-00-24.png">
-
 <img src="pictures/Screenshot from 2017-07-24 20-38-13.png">
 
 
 -Create Action to inform “Project Owners” if HIGH triggers happen
+
+<img src="pictures/Screenshot from 2017-07-24 21-00-20.png">
+
+<img src="pictures/Screenshot from 2017-07-24 21-00-24.png">
 
 <img src="pictures/Screenshot from 2017-07-24 20-36-41.png">
 
