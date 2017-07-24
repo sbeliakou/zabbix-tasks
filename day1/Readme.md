@@ -1,18 +1,7 @@
-## Task1
+## Task 1
 
 - created user, added to created Group
 <img src="Screenshot from 2017-07-24 17-57-26.png">
-
-
-
-
-
-
-
-
-
-
-
 
 
 - added zabbix agent, applied template to it
@@ -60,7 +49,7 @@
 
 
 
-## Task2
+## Task 2
 
 - Zabbix sender sended metrics
 <img src="Screenshot from 2017-07-24 22-36-08.png">
