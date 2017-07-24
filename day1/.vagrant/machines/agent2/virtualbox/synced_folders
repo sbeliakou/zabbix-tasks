@@ -1,0 +1,1 @@
+{"virtualbox":{"/share":{"guestpath":"/share","hostpath":"/home/student/workspace/git/zabbix-tasks/day1/share","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/student/workspace/git/zabbix-tasks/day1","disabled":false,"__vagrantfile":true}}}

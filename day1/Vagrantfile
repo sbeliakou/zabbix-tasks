@@ -1,33 +1,37 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
-  config.vm.define "zabbix_server" do |server|
-    server.vm.hostname = "server"
-    server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    server.vm.network "forwarded_port", guest: 80, host: 8080
-    server.vm.network "private_network", ip: "192.168.56.10"
-    server.vm.provider "virtualbox" do |vb|
-      vb.name = "Zabbix Server"
-      vb.memory = "1024"
+  config.vm.define "zabbix2" do |zabbix2|
+    zabbix2.vm.box = "zabbix2"
+    zabbix2.vm.hostname = 'zabbix2'
+    zabbix2.vm.box_url = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+    zabbix2.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+    zabbix2.vm.network :private_network, ip: "192.168.56.101"
+    zabbix2.vm.synced_folder "share/", "/share"
+    zabbix2.vm.provider :virtualbox do |v|
+      v.memory = "4096"
+      v.name = "zabbix2VM"
     end
-
-    server.vm.provision "shell", path: "scripts/server.sh"
-    server.vm.provision "shell", path: "scripts/agent.sh"
-
+    zabbix2.vm.provision "shell", inline: <<-SHELL
+    sudo su
+    chmod 777 /share/scripts/server.sh
+ 	  /share/scripts/server.sh
+    SHELL
   end
 
-  config.vm.define "host1" do |host1|
-    host1.vm.hostname = "host-agent1"
-    host1.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    host1.vm.network "private_network", ip: "192.168.56.11"
-    host1.vm.provider "virtualbox" do |vb|
-      vb.name = "Host1"
-      vb.memory = "1024"
+  config.vm.define "agent2" do |agent2|
+    agent2.vm.box = "agent2"
+    agent2.vm.hostname = 'agent2'
+    agent2.vm.box_url = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+    agent2.vm.network :private_network, ip: "192.168.56.111"
+    agent2.vm.synced_folder "share/", "/share"
+    agent2.vm.provider :virtualbox do |v|
+      v.memory = "2048"
+      v.name = "agent2"
     end
-
-    host1.vm.provision "shell", path: "scripts/agent.sh"
-
+    agent2.vm.provision "shell", inline: <<-SHELL
+    sudo su
+    chmod 777 /share/scripts/agent.sh
+    /share/scripts/agent.sh
+    SHELL
   end
 
 end
