@@ -82,3 +82,27 @@ Configure “Network discovery” so that, 2nd VM will be joined to Zabbix (grou
 
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
+
+
+
+
+Task. Zabbix Tools
+Testing Infrastructure:
+Vagrantfile to spin up 2 VMs (virtualbox):
+    - zabbix server, provisioned by Vagrant provisioner
+    - Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner
+Task:
+1. Configure the agent for replying to the specific server in passive and active mode.
+
+2. Use zabbix_sender to send data to server manually (use zabbix_sender with key –vv for maximal verbosity).
+
+<img src="pictures/Screenshot from 2017-07-24 21-30-36.png">
+
+<img src="pictures/Screenshot from 2017-07-24 21-31-05.png">
+
+3. Use zabbix_get as data receiver and examine zabbix agent sending’s. 
+
+<img src="pictures/Screenshot from 2017-07-24 21-40-46.png">
+
+
+For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
