@@ -37,5 +37,14 @@
 <img src="/day1/task1/19.jpg">
 <img src="/day1/task1/20.jpg">
 
+# Task. Zabbix Tools
+## 1. Configure the agent for replying to the specific server in passive and active mode.
+<img src="/day1/task2/1.jpg">
+<img src="/day1/task2/2.jpg">
 
+## 2. Use zabbix_sender to send data to server manually (use zabbix_sender with key –vv for maximal verbosity).
+<img src="/day1/task2/3.jpg">
+<img src="/day1/task2/4.jpg">
 
+## 3. Use zabbix_get as data receiver and examine zabbix agent sending’s. 
+<img src="/day1/task2/5.jpg">
