@@ -2,6 +2,7 @@
 ## 1. Using Zabbix UI:
 ### Create User group “Project Owners” 
 <img src="/day1/task1/1.jpg">
+
 ### Create User (example “Siarhei Beliakou”), assign user to “Project Owners”, set email
 <img src="/day1/task1/2.jpg">
 <img src="/day1/task1/3.jpg">
