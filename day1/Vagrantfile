@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
  config.vm.define "zabbix_server" do |server|
-    config.vm.box = "Centos-7.3"
+    config.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
     config.vm.hostname = "zabbix"
 
     config.vm.network :private_network, ip: "1.1.1.1"
@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
  end
 
  config.vm.define("2") do |slave|
-        slave.vm.box = "Centos-7.3"
+        slave.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
         slave.vm.hostname = "zabbix2"
 
         slave.vm.network :private_network, ip: "1.1.1.2"
