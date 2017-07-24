@@ -89,3 +89,43 @@ Configure “Network discovery” so that, 2nd VM will be joined to Zabbix (grou
 <img src="pictures/Screenshot from 2017-07-24 21-47-43.png">
 
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
+
+
+
+**Task. Zabbix Tools**
+
+Testing Infrastructure:
+
+Vagrantfile to spin up 2 VMs (virtualbox):
+
+zabbix server, provisioned by Vagrant provisioner
+
+Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner
+
+Task:
+
+1. Configure the agent for replying to the specific server in passive and active mode.
+
+<img src="pictures/Screenshot from 2017-07-24 22-09-36.png">
+
+2. Use zabbix_sender to send data to server manually (use zabbix_sender with key –vv for maximal verbosity).
+
+$ sudo yum -y install zabbix-sender
+
+$ zabbix_sender -z 192.168.56.10 -s "host1" -k system.cpu.load[,] -vv -o 1
+
+<img src="pictures/Screenshot from 2017-07-24 22-12-39.png">
+
+<img src="pictures/Screenshot from 2017-07-24 22-15-04.png">
+
+3. Use zabbix_get as data receiver and examine zabbix agent sending’s.
+
+$ sudo yum i-y nstall zabbix-get
+
+$ zabbix_get -s 192.168.56.11 -p 10050 -k "agent.version"
+
+$ zabbix_get -s 192.168.56.11 -p 10050 -k "system.swap.size[,pfree]"
+
+<img src="pictures/Screenshot from 2017-07-24 22-23-32.png">
+
+For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
