@@ -5,6 +5,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 - added zabbix agent, applied template to it
 <img src="Screenshot from 2017-07-24 18-10-11.png">
 
