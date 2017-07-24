@@ -37,6 +37,7 @@
 <img src="/day1/task1/19.jpg">
 <img src="/day1/task1/20.jpg">
 
+# =============================================================================
 # Task. Zabbix Tools
 ## 1. Configure the agent for replying to the specific server in passive and active mode.
 <img src="/day1/task2/1.jpg">
