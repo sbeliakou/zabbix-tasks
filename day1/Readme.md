@@ -1,5 +1,5 @@
-# Report Here
-Task. Zabbix. Basics
+
+# Task 1. Zabbix. Basics
 
 Testing Infrastructure:
 -Vagrantfile to spin up 2 VMs (virtualbox):
@@ -84,9 +84,7 @@ For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
 
 
-
-
-Task. Zabbix Tools
+# Task 2. Zabbix Tools
 Testing Infrastructure:
 Vagrantfile to spin up 2 VMs (virtualbox):
     - zabbix server, provisioned by Vagrant provisioner
