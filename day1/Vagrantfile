@@ -2,32 +2,30 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.define "zabbix_server" do |server|
-    server.vm.hostname = "server"
-    server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    server.vm.network "forwarded_port", guest: 80, host: 8080
-    server.vm.network "private_network", ip: "192.168.56.10"
-    server.vm.provider "virtualbox" do |vb|
-      vb.name = "Zabbix Server"
-      vb.memory = "1024"
+  config.vm.define "zabbix" do |zabbix|
+    zabbix.vm.box = "zabbix"
+    zabbix.vm.hostname = 'zabbix'
+    zabbix.vm.box_url = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+#    zabbix.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+    zabbix.vm.network :private_network, ip: "192.168.56.10" 
+    
+    zabbix.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.name = "zabbix"
     end
-
-    server.vm.provision "shell", path: "scripts/server.sh"
-    server.vm.provision "shell", path: "scripts/agent.sh"
-
-  end
-
-  config.vm.define "host1" do |host1|
-    host1.vm.hostname = "host-agent1"
-    host1.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-    host1.vm.network "private_network", ip: "192.168.56.11"
-    host1.vm.provider "virtualbox" do |vb|
-      vb.name = "Host1"
-      vb.memory = "1024"
+zabbix.vm.provision "shell", path: "script.sh"
+end
+  config.vm.define "zabbix2" do |zabbix2|
+    zabbix2.vm.box = "zabbix2"
+    zabbix2.vm.hostname = 'zabbix2'
+    zabbix2.vm.box_url = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+#    zabbix.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+    zabbix2.vm.network :private_network, ip: "192.168.56.11"   
+    
+    zabbix2.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+      vb.name = "zabbix2"
     end
-
-    host1.vm.provision "shell", path: "scripts/agent.sh"
-
-  end
-
+zabbix2.vm.provision "shell", path: "script2.sh"
+end
 end
