@@ -18,7 +18,7 @@ sed -i 's|Hostname=Zabbix server|Hostname=Zabbix client|' /etc/zabbix/zabbix_age
 
 systemctl start zabbix-agent;
 
-yum install -y java-1.8.0-openjdk-devel.x86_64;
+
 	
 #Prepare env
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.x86_64/jre/;
@@ -28,6 +28,34 @@ wget http://central.maven.org/maven2/org/apache/tomcat/tomcat-catalina-jmx-remot
 sed -i '$a JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.11 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"' /usr/share/tomcat/conf/tomcat.conf
 sed -i '35a  <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiRegistryPortPlatform="8097" rmiServerPortPlatform="8098" />' /usr/share/tomcat/conf/server.xml
 systemctl start tomcat;
+
+#loading python modules for script:
+yum  -y install python2-pip.noarch
+pip install requests
+
+
+wget https://raw.githubusercontent.com/SuperBazis/zabbix-tasks/atsuranauD2/day2/scripts/zabbixregistration.py -P /home/vagrant/
+chmod +x /home/vagrant/zabbixregistration.py
+
+touch /etc/systemd/system/zabbixreg.service
+chmod 664 /etc/systemd/system/zabbixreg.service
+
+cat >/etc/systemd/system/zabbixreg.service << 'EOL'
+[Unit]
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python /home/vagrant/zabbixregistration.py
+Type=forking
+PIDFile=path_to_pidfile
+
+[Install]
+WantedBy=default.target
+EOL
+
+systemctl daemon-reload
+systemctl start zabbixreg.service
+
 
 
 

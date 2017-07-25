@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
   config.vm.define "zabbix_server" do |server|
     server.vm.hostname = "server"
-    server.vm.box = "/home/student/workspace/sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+    server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
     server.vm.network "forwarded_port", guest: 80, host: 8080
     server.vm.network "private_network", ip: "192.168.56.10"
     server.vm.provider "virtualbox" do |vb|
