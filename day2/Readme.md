@@ -1,6 +1,6 @@
 # Report Here
 
-# Task 1. Java Monitoring with Java
+# Task 1. Java Monitoring with zabbix
 
 Testing Infrastructure:
 -Vagrantfile to spin up 2 VMs (virtualbox):
