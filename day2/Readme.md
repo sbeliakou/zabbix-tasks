@@ -34,7 +34,7 @@ Tasks:
 
 <img src="pictures/Screenshot from 2017-07-25 15-48-24.png">
 
-<img src="pictures/Screenshot from 2017-07-25 15-44-43.png">
+<img src="pictures/Screenshot from 2017-07-25 15-57-14.png">
 
 <img src="pictures/Screenshot from 2017-07-25 15-36-43.png">
 
