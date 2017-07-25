@@ -24,8 +24,12 @@ JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.
 systemctl start tomcat
 systemctl enable tomcat
 
+echo "### Download and deploy app ###"
+wget https://github.com/untiro/zabbix-tasks/raw/yshchanouski2/day2/scripts/clusterjsp.war -P /tmp
+mv /tmp/clusterjsp.war /var/lib/tomcat/webapps
+
 echo "### Install Zabbix Java Gateway ###"
-yum install zabbix-java-gateway
+yum install zabbix-java-gateway -y > /dev/null
 systemctl start zabbix-java-gateway
 systemctl enable zabbix-java-gateway
 
@@ -35,7 +39,8 @@ python /tmp/get-pip.py
 pip install requests
 
 echo "### Download and run python script ###"
-
+wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski2/day2/scripts/script.py -P /tmp
+python /tmp/script.py
 
 
 
