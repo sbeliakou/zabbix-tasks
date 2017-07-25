@@ -27,3 +27,7 @@
 
 <img src="pict/Screenshot from 2017-07-25 16-55-10.png">
 <img src="pict/Screenshot from 2017-07-25 16-57-21.png">
+
+# Task. Zabbix API
+
+ [zabbix-tasks/day2/zabbix.py](zabbix.py) 
