@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 rpm -qa | grep mariadb-server >> /tmp/t1.txt
 sed -i 's/enabled=1/enabled=0/g' /etc/yum/pluginconf.d/fastestmirror.conf 
 
