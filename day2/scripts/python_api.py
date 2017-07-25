@@ -57,6 +57,23 @@ def register_host(hostname, ip):
         })
         return a.text
 
-print (register_host('test1', '192.168.56.1'))
+#print (register_host('test1', '192.168.56.1'))
 
-def retrieve_host()
+def retrieve_host():
+    a = post({
+        "jsonrpc": "2.0",
+        "method": "host.get",
+        "params": {
+            "output": [
+                "hostid",
+                "host"
+            ],
+            "selectInterfaces": [
+                "interfaceid",
+                "ip"
+            ]
+        },
+        "id": 2,
+        "auth": auth_token
+    })
+    return a.text
