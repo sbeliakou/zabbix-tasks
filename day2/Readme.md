@@ -59,6 +59,7 @@ Testing Infrastructure:
 	3. Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner
 
 Registering Script requirements:
+
 	1. Written on Python 2.x
 	2. Starts at VM startup or on provision phase
 	3. Host registered in Zabbix server should have Name = Hostname (not IP)
