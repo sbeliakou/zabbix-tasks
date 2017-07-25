@@ -18,7 +18,9 @@ systemctl start tomcat
 
 yum install python2-pip -y
 pip install requests
+pip install configparser2
 
 wget -P /tmp/ https://raw.githubusercontent.com/bubalush/zabbix-tasks/ndolya_day2/day2/scripts/zabbix_create.py
+wget -P /tmp/ https://raw.githubusercontent.com/bubalush/zabbix-tasks/ndolya_day2/day2/scripts/zabbix_create.ini
 python /tmp/zabbix_create.py
 
