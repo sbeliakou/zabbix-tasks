@@ -14,6 +14,8 @@ def post(request):
          auth=HTTPBasicAuth(zabbix_api_admin_name, zabbix_api_admin_password)
     )
 
+
+
 auth_token = post({
     "jsonrpc": "2.0",
     "method": "user.login",
