@@ -1,13 +1,14 @@
 #!/bin/sh
 
-echo "AT THE BEGIN WAS ZABBIX..."
+# Installing mariadb, and some cool staff
 yum install -y mariadb mariadb-server
 yum install -y vim
-yum install -y zabbix-sender
-yum install -y zabbix-get
-echo "Installation of mysql"
+
+# Starting mysql server
 /usr/bin/mysql_install_db --user=mysql
 systemctl start mariadb
+
+# Check if started mysql server
 if pgrep -x "mysqld" > /dev/null
 then
     echo "MYSQLD IS RUNNING"
@@ -16,28 +17,35 @@ else
 fi
 echo "MYSQL STARTED, CREATING DB AND USERS"
 
+# Creating DB for zabbix
 mysql -uroot -Bse "create database zabbix character set utf8 collate utf8_bin;
 grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
 
+# Installing zabbix server
 yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
 yum install -y zabbix-server-mysql zabbix-web-mysql
+
+# Importing initial schema and data
 zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -pzabbix zabbix
 sed -i 's/# DBHost=localhost/DBHost=localhost/' /etc/zabbix/zabbix_server.conf
 sed -i 's/# DBPassword=/DBPassword=zabbix/' /etc/zabbix/zabbix_server.conf
+
+# Starting mysql server and checking for start
 systemctl start zabbix-server
 sleep 3
-
 if pgrep -x "zabbix-server" > /dev/null
 then
     echo "ZABBIX-SERVER IS RUNNING"
 else
     echo "ZABBIX-SERVER IS STOPPED"
 fi
-echo "FRONT-END INSTALLATION..."
+
+# FRONT-END Zabbix INSTALLATION
 yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
 yum install -y zabbix-web-mysql
 sed -i  's/# php_value date.timezone Europe\/Riga/php_value date.timezone Europe\/Minsk/' /etc/httpd/conf.d/zabbix.conf
 
+# Adding Virtual host for zabbix direct access
 touch /etc/httpd/conf.d/vhost.conf
 cat > /etc/httpd/conf.d/vhost.conf << EOL
 <VirtualHost *:80>
@@ -46,6 +54,7 @@ cat > /etc/httpd/conf.d/vhost.conf << EOL
 </VirtualHost>
 EOL
 
+# Adding conf to frontend
 touch /etc/zabbix/web/zabbix.conf.php
 cat > /etc/zabbix/web/zabbix.conf.php << 'EOL'
 <?php
@@ -68,7 +77,6 @@ $ZBX_SERVER_NAME = 'zabbix';
 
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 EOL
-
 if [ -s /etc/zabbix/web/zabbix.conf.php ]
 then
    echo "ZABBIX.CONF.PHP EXISTS and is not empty "
@@ -76,24 +84,25 @@ else
    echo " ZABBIX.CONF.PHP file does not exist, or is empty "
 fi
 
+# Starting httpd
 systemctl start httpd
 sleep 2
 HTTP_STATUS="$(curl -IL --silent http://localhost | grep HTTP )";
 echo "${HTTP_STATUS}"
 
-echo "Zabbix Agent Installation"
-
+# Installing zabbix agent
 yum install -y zabbix-agent;
 
-sed -i 's|# DebugLevel=3|DebugLevel=3|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|Server=127.0.0.1|Server=192.168.56.200|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|# ListenPort=10050|ListenPort=10050|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|# ListenIP=0.0.0.0|ListenIP=0.0.0.0|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|# StartAgents=3|StartAgents=3|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|ServerActive=127.0.0.1|ServerActive=192.168.56.200:10051|' /etc/zabbix/zabbix_agentd.conf;
-sed -i 's|Hostname=Zabbix server|Hostname=Zabbix client|' /etc/zabbix/zabbix_agentd.conf;
+# Edit agent conf files
+sed -i 's/# DebugLevel=3/DebugLevel=3/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/Server=127.0.0.1/Server=192.168.56.200/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/# ListenPort=10050/ListenPort=10050/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/# ListenIP=0.0.0.0/ListenIP=0.0.0.0/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/# StartAgents=3/StartAgents=3/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/ServerActive=127.0.0.1/ServerActive=192.168.56.200:10051/' /etc/zabbix/zabbix_agentd.conf;
+sed -i 's/Hostname=Zabbix server/Hostname=Zabbix client/' /etc/zabbix/zabbix_agentd.conf;
 
-echo "Zabbix Agent starting..."
+# Starting agent and checking for start
 systemctl start zabbix-agent;
 sleep 2;
 

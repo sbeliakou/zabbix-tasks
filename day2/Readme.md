@@ -1,77 +1,45 @@
 # Report Here
 
-# Task 1. Zabbix. Basics
+# Task 1. Java Monitoring with Java
 
 Testing Infrastructure:
 -Vagrantfile to spin up 2 VMs (virtualbox):
 -zabbix server, provisioned by Vagrant provisioner
 -Zabbix agents on both VMs, provisioned by Vagrant provisioner
--Configure zabbix to work on the server directly without /zabbix
+-Install Tomcat 7 on 2nd VM
 
-<img src="pictures/Screenshot from 2017-07-24 23-08-49.png">
+Tasks:
+1. Configure Zabbix to examine Java parameters via Java Gateway
 
-http://zabbix-server/zabbix -> http://zabbix-server
+<img src="pictures/Screenshot from 2017-07-25 15-31-27.png">
 
-Task:
-You should install and configure Zabbix server and agents.
+2. Configure triggers to alert once these parameters changed.
 
-1. Using Zabbix UI:
--Create User group “Project Owners”
+<img src="pictures/Screenshot from 2017-07-25 16-19-12.png">
 
--Create User (example “Siarhei Beliakou”), assign user to “Project Owners”, set email
+<img src="pictures/Screenshot from 2017-07-25 16-12-46.png">
 
-<img src="pictures/Screenshot from 2017-07-24 19-36-43.png">
+-Alert
 
--Add 2nd VM to zabbix: create Host group (“Project Hosts”), create Host in this group, enable ZABBIX Agent monitoring
+<img src="pictures/Screenshot from 2017-07-25 16-12-57.png">
 
-<img src="pictures/Screenshot from 2017-07-24 19-47-41.png">
+# Task 2. Web Monitoring with Zabbix
 
--Assign to this host template of Linux
-
-<img src="pictures/Screenshot from 2017-07-24 19-49-27.png">
-
--Create custom checks (CPU Load, Memory load, Free space on file systems, Network load)
-
-<img src="pictures/Screenshot from 2017-07-24 23-13-57.png">
-
--Create trigger with Severity HIGH, check if it works (Problem/Recovery)
-
-<img src="pictures/Screenshot from 2017-07-24 23-16-36.png">
-
-
-
-
--Create Action to inform “Project Owners” if HIGH triggers happen
-<img src="pictures/Screenshot from 2017-07-24 22-02-51.png">
-
-<img src="pictures/Screenshot from 2017-07-24 21-00-20.png">
-
-<img src="pictures/Screenshot from 2017-07-24 22-43-20.png">
-
-<img src="pictures/Screenshot from 2017-07-24 22-57-42.png">
-
-For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
-
-2. Using Zabbix UI:
-Configure “Network discovery” so that, 2nd VM will be joined to Zabbix (group “Project Hosts”, Template “Template OS Linux”)
-
-For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
-
-# Task 2. Zabbix Tools
 Testing Infrastructure:
-Vagrantfile to spin up 2 VMs (virtualbox):
-    - zabbix server, provisioned by Vagrant provisioner
-    - Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner
-Task:
-1. Configure the agent for replying to the specific server in passive and active mode.
+-Vagrantfile to spin up 2 VMs (virtualbox):
+-zabbix server, provisioned by Vagrant provisioner
+-Zabbix agents on both VMs, provisioned by Vagrant provisioner
+-Install Tomcat 7 on 2nd VM, deploy any “hello world” application
 
-2. Use zabbix_sender to send data to server manually (use zabbix_sender with key –vv for maximal verbosity).
+Tasks:
+1. Configure WEB check:
+Scenario to test Tomcat availability as well as Application heath
 
-<img src="pictures/Screenshot from 2017-07-24 23-32-12.png">
+<img src="pictures/Screenshot from 2017-07-25 16-36-19.png">
 
-3. Use zabbix_get as data receiver and examine zabbix agent sending’s.
+<img src="pictures/Screenshot from 2017-07-25 17-12-18.png">
 
+2. Configure Triggers to alert once WEB resources become unavailable
 
-
-For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
+<img src="pictures/Screenshot from 2017-07-25 17-13-16.png">
 
