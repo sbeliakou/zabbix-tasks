@@ -41,9 +41,10 @@ sol:
 	2. Configure Triggers to alert once WEB resources become unavailable
 
 sol:
-1. configure trigger for response code
 
-{192.168.56.11:web.test.fail[tomcat helloworld is available].last(0)}>0
+	1. configure trigger for response code
+
+	{192.168.56.11:web.test.fail[tomcat helloworld is available].last(0)}>0
 
 screens of workflow are placed in d2_t2.pdf
 
