@@ -117,6 +117,8 @@ For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
 [zabbix_create.py](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/zabbix_create.py) - Create Host in Zabbix
 
+[zabbix_create.ini](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/zabbix_create.ini) - Defene veriables for [zabbix_create.py](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/zabbix_create.py)
+
 [Vagrantfile](https://github.com/bubalush/zabbix-tasks/blob/ndolya_day2/day2/Vagrantfile)- Vagrantfile to spin up 2 VMs
 
 [agent.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/agent.sh) - Install Zabbix-agent
