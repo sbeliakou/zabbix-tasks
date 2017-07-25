@@ -23,5 +23,48 @@
 <img src="screens/13.png">
 <img src="screens/14.png">
 
+##  Task 2 - Web Monitoring with Zabbix:
+- Scenario to test Tomcat availability as well as Application heath
+
+<img src="screens/15.png">
+<img src="screens/16.png">
+<img src="screens/17.png">
+<img src="screens/18.png">
+<img src="screens/19.png">
+<img src="screens/20.png">
+<img src="screens/21.png">
+
+*after stop tomcat*
+
+<img src="screens/22.png">
+
+- Configure Triggers to alert once WEB resources become unavailable
+
+<img src="screens/23.png">
+
+*systemctl stop tomcat*
+
+<img src="screens/24.png">
+<img src="screens/25.png">
+
+##  Task 3 - Zabbix API:
+
+- Starts at VM startup or on provision phase
+
+- Host registered in Zabbix server should have Name = Hostname (not IP)
+
+- Host registered in Zabbix server should belong to ”CloudHosts” group
+
+- Host registered in Zabbix server should be linked with Custom template
+
+- This script should create group “CloudHosts” id it doesn’t exist
+
+# Result script
+ [a link](https://github.com/SuperBazis/zabbix-tasks/blob/atsuranauD2/day2/scripts/zabbixregistration.py)
+
+
+
+
+
 
 
