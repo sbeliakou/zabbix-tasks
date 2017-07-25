@@ -41,7 +41,7 @@ Tasks:
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
 # Used Scripts
-[tomcat.sh](zabbix-tasks/day2/scripts/tomcat.sh)- Install Tomcat server and configure JMX/RMI
+[tomcat.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/tomcat.sh)- Install Tomcat server and configure JMX/RMI
 
 agent.sh - Install Zabbix-agent
 
