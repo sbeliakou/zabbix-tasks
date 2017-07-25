@@ -156,22 +156,3 @@ customid_group = exist_check(zabbix_ip, 'CloudHosts', 'hostgroup.get').json()['r
 
 if exist_check(zabbix_ip, 'Custom', 'template.get').json()['result'] == []:
     create_template('Custom', zabbix_ip, customid_host, customid_group)
-
-def retrieve_host():
-    a = post({
-        "jsonrpc": "2.0",
-        "method": "host.get",
-        "params": {
-            "output": [
-                "hostid",
-                "host"
-            ],
-            "selectInterfaces": [
-                "interfaceid",
-                "ip"
-            ]
-        },
-        "id": 2,
-        "auth": auth_token
-    })#  .json()["result"]
-    return a.text
