@@ -9,6 +9,8 @@ zabbix_server = config.get('common','zabbix_server')
 zabbix_api_admin_name = config.get('common','zabbix_api_admin_name')
 zabbix_api_admin_password = config.get('common','zabbix_api_admin_password')
 hostip=config.get('common','hostip')
+templatename=config.get('common','templatename')
+groupname=config.get('common','groupname')
 
 hostname=platform.node()
 
@@ -129,8 +131,8 @@ def register_host(hostname, ip, group, template):
          print('Host already exist:'+'hostID='+str(r))
 
 
-groupid=group_create("CloudHosts")
-templateid=template_create("Server-Tomcat",groupid)
+groupid=group_create(groupname)
+templateid=template_create(templatename,groupid)
 hostid=register_host(hostname,hostip,groupid,templateid)
 
 
