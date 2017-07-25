@@ -1,5 +1,5 @@
 <img src="Screenshot from 2017-07-25 13-29-56.png">	
-<img src="Screenshot from 2017-07-25 16-40-12.png">	
+
 <img src="Screenshot from 2017-07-25 16-41-01.png">
 <img src="Screenshot from 2017-07-25 16-41-50.png">
 <img src="Screenshot from 2017-07-25 16-42-31.png">
