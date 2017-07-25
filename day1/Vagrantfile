@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
       vb.memory = "4096"
       vb.name = "zabbix"
     end
-zabbix.vm.provision "shell", path: "script.sh"
+zabbix.vm.provision "shell", path: "scripts/script.sh"
 end
   config.vm.define "zabbix2" do |zabbix2|
     zabbix2.vm.box = "zabbix2"
@@ -26,6 +26,6 @@ end
       vb.memory = "2048"
       vb.name = "zabbix2"
     end
-zabbix2.vm.provision "shell", path: "script2.sh"
+zabbix2.vm.provision "shell", path: "scripts/script2.sh"
 end
 end
