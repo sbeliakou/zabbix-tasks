@@ -6,7 +6,7 @@ You should install and configure Zabbix server and agents.
 
 # Used Scripts
 
-[Vagrantfile](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/Vagranfile)- Vagrantfile to spin up 2 VMs
+[Vagrantfile](https://github.com/bubalush/zabbix-tasks/blob/ndolya_day2/day2/Vagrantfile)- Vagrantfile to spin up 2 VMs
 
 [agent.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/agent.sh) - Install Zabbix-agent
 
