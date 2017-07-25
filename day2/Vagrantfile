@@ -19,10 +19,10 @@ Vagrant.configure("2") do |config|
 #client
   config.vm.define "zabbix-client" do |client|
    client.vm.define "zabbix-client"
-   server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-   #server.vm.box = "centos73-min.box"
-   server.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
-   #server.vm.box_url = "centos73-min.box"
+   client.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+   #client.vm.box = "centos73-min.box"
+   client.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
+   #client.vm.box_url = "centos73-min.box"
    client.vm.hostname = "zabbix-client"
    client.vm.network "private_network", ip: "192.168.56.106"
    client.vm.provider "virtualbox" do |vb|
