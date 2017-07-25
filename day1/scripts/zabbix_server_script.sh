@@ -13,6 +13,12 @@ awk '{gsub("# DBPassword=","DBPassword=password")}{print}' /etc/zabbix/zabbix_se
 mv -uf tmp /etc/zabbix/zabbix_server.conf
 mv -uf zabbix.conf.php /etc/zabbix/web/zabbix.conf.php
 systemctl start zabbix-server
+systemctl enable zabbix-server
 awk '{gsub("# php_value date.timezone Europe/Riga","php_value date.timezone Europe/Minsk")}{print}' /etc/httpd/conf.d/zabbix.conf > tmp
 mv -uf tmp /etc/httpd/conf.d/zabbix.conf
+echo "  <VirtualHost 192.168.100.101>
+  DocumentRoot "/usr/share/zabbix"
+  </VirtualHost>
+" >> /etc/httpd/conf/httpd.conf
+ +systemctl start httpd
 systemctl start httpd

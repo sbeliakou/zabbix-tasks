@@ -13,8 +13,8 @@ Vagrant.configure(2) do |config|
     end
     zabbix.vm.post_up_message = "zabbix vm is loaded"
     zabbix.vm.provision "file", source: "./zabbix.conf.php", destination: "zabbix.conf.php"
-    zabbix.vm.provision "shell", path: "zabbix_server_script.sh"
-    zabbix.vm.provision "shell", path: "zabbix_agent_script.sh"
+    zabbix.vm.provision "shell", path: "scripts/zabbix_server_script.sh"
+    zabbix.vm.provision "shell", path: "scripts/zabbix_agent_script.sh"
  end
   config.vm.define "zabbix_agent" do |zabbix|
     zabbix.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
@@ -26,6 +26,6 @@ Vagrant.configure(2) do |config|
      vb.name = "zabbix_agent"
     end
     zabbix.vm.post_up_message = "zabbix vm is loaded"
-    zabbix.vm.provision "shell", path: "zabbix_agent_script.sh"
+    zabbix.vm.provision "shell", path: "scripts/zabbix_agent_script.sh"
  end
 end
