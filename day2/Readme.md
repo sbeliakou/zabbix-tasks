@@ -1,15 +1,10 @@
 # Task 3. Java Monitoring with Java
 
-## Vagrantfile to spin up 2 VMs (virtualbox):
-[Vagrantfile](Vagrantfile)
+## [Vagrantfile](Vagrantfile) to spin up 2 VMs (virtualbox):
 
-* Zabbix server, provisioned by Vagrant provisioner
-[server.sh](scripts/server.sh)
+* Zabbix server, provisioned by Vagrant provisioner [server.sh](scripts/server.sh)
 
-* Zabbix agents on both VMs, provisioned by Vagrant provisioner
-
-* Install Tomcat 7 on 2nd VM
-[server.sh](scripts/agent.sh)
+* Zabbix agents on both VMs, provisioned by Vagrant provisioner with Install Tomcat 7 on 2nd VM [agent.sh](scripts/agent.sh)
 
 
 1. Configure Zabbix to examine Java parameters via Java Gateway 
@@ -43,7 +38,6 @@
 
 # Task 5. Zabbix API
 
-* Scrypt execution results
-[script.py](scripts/script.py)
+* [script.py](scripts/script.py) execution results
 <img src="Screenshot from 2017-07-25 16-44-31.png">
 <img src="Screenshot from 2017-07-25 16-45-20.png">
