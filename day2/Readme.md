@@ -4,6 +4,16 @@
 Task:
 You should install and configure Zabbix server and agents.
 
+# Used Scripts
+
+[Vagrantfile](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/Vagranfile)- Vagrantfile to spin up 2 VMs
+
+[agent.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/agent.sh) - Install Zabbix-agent
+
+[server.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/server.sh) - Install Zabbix-server, zabbix-java-gateway
+
+[tomcat.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/tomcat.sh)- Install Tomcat server and configure JMX/RMI
+
 Testing Infrastructure:
 
 Vagrantfile to spin up 2 VMs (virtualbox):
@@ -40,9 +50,3 @@ Tasks:
 
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
-# Used Scripts
-[tomcat.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day2/day2/scripts/tomcat.sh)- Install Tomcat server and configure JMX/RMI
-
-agent.sh - Install Zabbix-agent
-
-server.sh - Install Zabbix-server, zabbix-java-gateway
