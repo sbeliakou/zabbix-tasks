@@ -50,3 +50,30 @@ Tasks:
 
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
+
+# Task 2. Web Monitoring with Zabbix
+
+Testing Infrastructure:
+
+Vagrantfile to spin up 2 VMs (virtualbox):
+
+- zabbix server, provisioned by Vagrant provisioner
+- Zabbix agents on both VMs, provisioned by Vagrant provisioner
+
+Install Tomcat 7 on 2nd VM, deploy any “hello world” application
+
+Tasks:
+
+1. Configure WEB check:
+
+Scenario to test Tomcat availability as well as Application heath
+
+<img src="pictures/Screenshot from 2017-07-25 17-02-52.png">
+
+2. Configure Triggers to alert once WEB resources become unavailable
+
+<img src="pictures/Screenshot from 2017-07-25 17-02-25.png">
+
+<img src="pictures/Screenshot from 2017-07-25 17-02-06.png">
+
+For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
