@@ -4,7 +4,7 @@ import platform
 import configparser2
 
 config = configparser2.ConfigParser()
-config.read('conf.ini')
+config.read('zabbix_create.ini')
 zabbix_server = config.get('common', 'zabbix_server')
 zabbix_api_admin_name = config.get('common', 'zabbix_api_admin_name')
 zabbix_api_admin_password = config.get('common', 'zabbix_api_admin_password')
