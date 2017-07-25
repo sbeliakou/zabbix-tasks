@@ -1,6 +1,8 @@
 import os, requests, json, sys
 from requests.auth import HTTPBasicAuth
+import platform
 
+hostname=platform.node()
 zabbix_server = "192.168.56.10"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
@@ -125,7 +127,7 @@ def register_host(hostname, ip, group, template):
 
 groupid=group_create("CloudHosts")
 templateid=template_create("Server-Tomcat",groupid)
-hostid=register_host("Tomcat-server","192.168.56.11",groupid,templateid)
+hostid=register_host(hostname,"192.168.56.11",groupid,templateid)
 
 
 
