@@ -6,7 +6,7 @@ def main():
     zabbix_server = "192.168.56.70/zabbix"
     zabbix_api_admin_name = "Admin"
     zabbix_api_admin_password = "zabbix"
-    hostname = "hostname"
+    hostname = "host-agent1"
     ip = "192.168.56.71"
     templatename="Custom template"
 
