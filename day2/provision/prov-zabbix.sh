@@ -24,13 +24,9 @@ zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -proot 
 echo "==> Database configuration for Zabbix server"
 sed -i 's/# DBPassword=/DBPassword=root/g' /etc/zabbix/zabbix_server.conf
 
-echo "==> Starting Zabbix server process"
-systemctl start zabbix-server
-
-echo "===> Configuring PHP settings"
-sed -i '/always_populate_raw_post_data -1/a php_value date.timezone Europe\/Minsk' /etc/httpd/conf.d/zabbix.conf 
 
 echo "===> Configuring Zabbix"
+
 echo "<?php
 // Zabbix GUI configuration file.
 global \$DB;
@@ -48,10 +44,20 @@ global \$DB;
 \$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 " > /etc/zabbix/web/zabbix.conf.php
 
-echo "==> Starting Front-end "
-echo "<VirtualHost 10.1.1.1>
- DocumentRoot "/usr/share/zabbix"
-</VirtualHost>" >> /etc/httpd/conf/httpd.conf
+sed -i 's/Alias \/zabbix \/usr\/share\/zabbix/<VirtualHost *:80>/' /etc/httpd/conf.d/zabbix.conf
+sed -i '/<VirtualHost \*:80>/ a\    ServerName zabbix-server' /etc/httpd/conf.d/zabbix.conf
+sed -i '/ServerName zabbix-server/ a\    DocumentRoot \/usr\/share\/zabbix\/' /etc/httpd/conf.d/zabbix.conf
+sed -i '/DocumentRoot \/usr\/share\/zabbix\// a\<\/VirtualHost>' /etc/httpd/conf.d/zabbix.conf
+
+echo "===> Configuring PHP settings"
+sed -i '/always_populate_raw_post_data -1/a php_value date.timezone Europe\/Minsk' /etc/httpd/conf.d/zabbix.conf 
+
+echo "==> Starting Zabbix server process"
+systemctl enable zabbix-server 
+systemctl start zabbix-server 
+
+echo "==> Starting httpd"
+systemctl enable httpd
 systemctl start httpd
 
 
