@@ -32,9 +32,6 @@ zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -pzabbi
 sed -i 's|# DBHost=localhost|DBHost=localhost|' /etc/zabbix/zabbix_server.conf;
 sed -i 's|# DBPassword=|DBPassword=zabbix|' /etc/zabbix/zabbix_server.conf;
 
-#Starting Zabbix server process
-systemctl start zabbix-server;
-
 #Configuring PHP settings
 sed -i 's|# php_value date.timezone Europe/Riga|php_value date.timezone Europe/Minsk|' /etc/httpd/conf.d/zabbix.conf;
 
@@ -73,6 +70,17 @@ EOL
 
 #Starting Front-end
 systemctl start httpd;
+
+#Installing, configuring and starting zabbix gateway
+yum -y install zabbix-java-gateway;
+sed -i 's|# JavaGateway=|JavaGateway=192.168.56.10|' /etc/zabbix/zabbix_server.conf;
+sed -i 's|# JavaGatewayPort=10052|JavaGatewayPort=10052|' /etc/zabbix/zabbix_server.conf;
+sed -i 's|# StartJavaPollers=0|StartJavaPollers=5|' /etc/zabbix/zabbix_server.conf;
+systemctl start zabbix-java-gateway;
+
+#Starting Zabbix server process
+systemctl start zabbix-server;
+
 
 
 
