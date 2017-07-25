@@ -1,5 +1,7 @@
 yum install zip unzip net-tools vim -y
 
+echo "111.111.11.12 tomcat" >> /etc/hosts
+
 ###ZABBIX###
 yum install mariadb mariadb-server -y
 /usr/bin/mysql_install_db --user=mysql
