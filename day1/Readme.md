@@ -1,4 +1,4 @@
-# Task1. Zabbiks Basics
+# Task1. Zabbix Basics
 ## all job procces in pictures attached
 1.Configure zabbix to work on the server directly without /zabbix 
 sol: add virtualhost block to httpd.conf
