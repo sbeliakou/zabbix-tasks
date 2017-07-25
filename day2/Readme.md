@@ -79,8 +79,10 @@ Vagrantfile to spin up 2 VMs (virtualbox):
   - Host registered in Zabbix server should have Name = Hostname (not IP)  
   - Host registered in Zabbix server should belong to ”CloudHosts” group  
   - Host registered in Zabbix server should be linked with Custom template  
-  - This script should create group “CloudHosts” id it doesn’t exist  
+  - This script should create group “CloudHosts” if it doesn’t exist  
   - For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”  
 
-  **task script:**
-script for this task is [here](scripts/add_host.py)
+##task scripts:  
+python script for this task is [here](scripts/add_host.py)
+Vagrantfile is [here](Vagrantfile)
+bash scripts for server and client are [here](scripts/server.sh) and [here](scripts/client.sh)
