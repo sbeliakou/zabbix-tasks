@@ -21,7 +21,6 @@ pip install requests configparser2
 
 wget -P /tmp/ https://raw.githubusercontent.com/bubalush/zabbix-tasks/ndolya_day2/day2/scripts/zabbix_create.ini
 wget -P /tmp/ https://raw.githubusercontent.com/bubalush/zabbix-tasks/ndolya_day2/day2/scripts/zabbix_create.py
-
-
-python /tmp/zabbix_create.py
+cd /tmp/
+python zabbix_create.py
 
