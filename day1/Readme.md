@@ -44,3 +44,6 @@ configure ip range and in operations tab add operations like:
 
 Add to host groups: Project Hosts
 Link to templates: Template OS Linux
+
+#Task 2. Zabbix tools
+1. Install tools and send commands from host to zabbix server
