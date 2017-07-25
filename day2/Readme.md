@@ -1,6 +1,6 @@
-**Task. Java Monitoring with Java**
+# Task. Java Monitoring with Java #
 
-Task:
+**Task:**
 
 You should install and configure Zabbix server and agents.
 
@@ -18,9 +18,9 @@ Install Tomcat 7 on 2nd VM
 
 <img src="pictures/Screenshot from 2017-07-25 12-13-45.png">
 
-**Tasks:**
+## Tasks: ##
 
-1. Configure Zabbix to examine Java parameters via Java Gateway (http://jmxmonitor.sourceforge.net/jmx.html)
+### 1. Configure Zabbix to examine Java parameters via Java Gateway (http://jmxmonitor.sourceforge.net/jmx.html) ###
 
 <img src="pictures/Screenshot from 2017-07-25 13-31-07.png">
 
@@ -40,7 +40,7 @@ Install Tomcat 7 on 2nd VM
 
 <img src="pictures/Screenshot from 2017-07-25 15-59-42.png">
 
-2. Configure triggers to alert once these parameters changed.
+### 2. Configure triggers to alert once these parameters changed. ###
 
 <img src="pictures/Screenshot from 2017-07-25 15-55-19.png">
 
