@@ -1,7 +1,5 @@
-import os
 import requests
 import json
-import sys
 from requests.auth import HTTPBasicAuth
 
 zabbix_server = "zabbix"
@@ -54,10 +52,108 @@ def register_host(hostname, ip):
             },
             "auth": auth_token,
             "id": 1
-        })#.json()["result"]
-        return a.text
+        })
+        return a
 
-#print (register_host('test10001', '192.168.56.1'))
+
+def create_hostgroup (name, ip, host=None):
+    a = post(
+        {
+            "jsonrpc": "2.0",
+            "method": "hostgroup.create",
+            "params": {
+                "interfaces": [{
+                    "type": 1,
+                    "main": 1,
+                    "useip": 1,
+                    "ip": ip,
+                    "dns": "",
+                    "port": "10050"
+                }],
+                "name": name,
+                "hosts": [
+                    {
+                        "hostid": host
+                    }]
+            },
+            "auth": auth_token,
+            "id": 1
+        }
+    )
+    return a
+
+
+def create_template(name, ip, host, group):
+    a = post(
+        {
+            "jsonrpc": "2.0",
+            "method": "template.create",
+            "params": {
+                "interfaces": [{
+                    "type": 1,
+                    "main": 1,
+                    "useip": 1,
+                    "ip": ip,
+                    "dns": "",
+                    "port": "10050"
+                }],
+                "host": name,
+                "groups": {
+                    "groupid": group
+                },
+                "hosts": [
+                    {
+                        "hostid": host
+                    }]
+            },
+            "auth": auth_token,
+            "id": 1
+        }
+    )
+    return a
+
+
+def exist_check(ip, name, type):
+    if type == "hostgroup.get" or "template.get" or "host.get":
+        a = post(
+            {
+                "jsonrpc": "2.0",
+                "method": type,
+                "params": {
+                    "interfaces": [{
+                        "type": 1,
+                        "main": 1,
+                        "useip": 1,
+                        "ip": ip,
+                        "dns": "",
+                        "port": "10050"
+                    }],
+                    "output": "extend",
+                    "filter": {
+                        "name": name
+                    }
+                },
+                "auth": auth_token,
+                "id": 1
+            }
+        )
+        return a
+    else:
+        return "Post method incompatibility"
+
+
+if exist_check(zabbix_ip, 'Hostname', 'host.get').json()['result'] == []:
+    register_host('Hostname', zabbix_ip)
+
+customid_host = exist_check(zabbix_ip, 'Hostname', 'host.get').json()['result'][0]['hostid']
+
+if exist_check(zabbix_ip, 'CloudHosts', 'hostgroup.get').json()['result'] == []:
+    create_hostgroup('CloudHosts', zabbix_ip, customid_host)
+
+customid_group = exist_check(zabbix_ip, 'CloudHosts', 'hostgroup.get').json()['result'][0]['groupid']
+
+if exist_check(zabbix_ip, 'Custom', 'template.get').json()['result'] == []:
+    create_template('Custom', zabbix_ip, customid_host, customid_group)
 
 def retrieve_host():
     a = post({
@@ -75,5 +171,5 @@ def retrieve_host():
         },
         "id": 2,
         "auth": auth_token
-    })#.json()["result"]
+    })#  .json()["result"]
     return a.text
