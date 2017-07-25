@@ -5,10 +5,10 @@ import configparser2
 
 config = configparser2.ConfigParser()
 config.read('zabbix_create.ini')
-zabbix_server = config.get('common', 'zabbix_server')
-zabbix_api_admin_name = config.get('common', 'zabbix_api_admin_name')
-zabbix_api_admin_password = config.get('common', 'zabbix_api_admin_password')
-hostip=config.get('common', 'hostip')
+zabbix_server = config.get('common','zabbix_server')
+zabbix_api_admin_name = config.get('common','zabbix_api_admin_name')
+zabbix_api_admin_password = config.get('common','zabbix_api_admin_password')
+hostip=config.get('common','hostip')
 
 hostname=platform.node()
 
@@ -131,7 +131,7 @@ def register_host(hostname, ip, group, template):
 
 groupid=group_create("CloudHosts")
 templateid=template_create("Server-Tomcat",groupid)
-hostid=register_host(hostname,"192.168.56.11",groupid,templateid)
+hostid=register_host(hostname,hostip,groupid,templateid)
 
 
 
