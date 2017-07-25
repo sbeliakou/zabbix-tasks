@@ -85,4 +85,4 @@ Vagrantfile to spin up 2 VMs (virtualbox):
 ## Task scripts:  
 python script for this task is [here](scripts/add_host.py)  
 Vagrantfile is [here](Vagrantfile)  
-bash scripts for server and client are [here](scripts/server.sh) and [here](scripts/client.sh)  
+bash scripts for server and client are [here](scripts/server.sh) and [here](scripts/agent.sh)  
