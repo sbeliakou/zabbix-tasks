@@ -54,10 +54,10 @@ def register_host(hostname, ip):
             },
             "auth": auth_token,
             "id": 1
-        })
+        })#.json()["result"]
         return a.text
 
-#print (register_host('test1', '192.168.56.1'))
+#print (register_host('test10001', '192.168.56.1'))
 
 def retrieve_host():
     a = post({
@@ -75,5 +75,5 @@ def retrieve_host():
         },
         "id": 2,
         "auth": auth_token
-    })
+    })#.json()["result"]
     return a.text
