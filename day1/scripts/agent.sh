@@ -1,11 +1,11 @@
 #!/bin/sh
+# Installing zabbix agent and other cool staff
 echo "Zabbix Agent Installation"
 yum install -y vim;
 yum install -y net-tools;
 yum install -y http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
 yum install -y zabbix-agent;
-yum install -y zabbix-sender
-yum install -y zabbix-get
+
 sed -i 's|# DebugLevel=3|DebugLevel=3|' /etc/zabbix/zabbix_agentd.conf;
 sed -i 's|Server=127.0.0.1|Server=192.168.56.200|' /etc/zabbix/zabbix_agentd.conf;
 sed -i 's|# ListenPort=10050|ListenPort=10050|' /etc/zabbix/zabbix_agentd.conf;
@@ -24,3 +24,4 @@ then
 else
     echo "AGENT IS STOPPED"
 fi
+
