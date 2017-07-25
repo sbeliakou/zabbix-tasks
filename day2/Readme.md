@@ -26,7 +26,7 @@ script of zabbxi_server for gateway usage is(in the end of file): zabbix-tasks/d
 ####################################
 Task2 
 Web Monitoring with Zabbix
-
+####################################
 1. Configure WEB check
 
 sol:
