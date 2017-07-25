@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       owner: "vagrant", group: "vagrant", type: "virtualbox"
 
     zb.vm.provision "shell", inline: <<-SHELL
-	/home/vagrant/vb-share/zab.sh
+	/home/vagrant/vb-share/scripts/zab.sh
     SHELL
   end
 
@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
       owner: "vagrant", group: "vagrant", type: "virtualbox"
 
     ag.vm.provision "shell", inline: <<-SHELL
-	/home/vagrant/vb-share/other.sh	
+	/home/vagrant/vb-share/scripts/other.sh	
     SHELL
   end
 end
