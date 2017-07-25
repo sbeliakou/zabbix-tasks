@@ -83,7 +83,6 @@ Install Tomcat 7 on 2nd VM, deploy any “hello world” application
 
 <img src="pictures/Screenshot from 2017-07-25 17-06-53.png">
 
-<img src="pictures/Screenshot from 2017-07-25 16-58-08.png">
 
 <img src="pictures/Screenshot from 2017-07-25 17-05-54.png">
 
