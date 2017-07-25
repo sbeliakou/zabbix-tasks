@@ -58,7 +58,7 @@
 ### Host registered in Zabbix server should be linked with Custom template
 ### This script should create group “CloudHosts” id it doesn’t exist
 
-# Provision file for Agent (2nd VM)(create systemd unit file to register od disable host automatically):
+# Provision file for Agent (2nd VM)(create systemd unit file to register or disable host automatically with python script):
 [a link](https://github.com/aion3181/zabbix-tasks/blob/day2/day2/script2.sh)
 
 # Python script:
