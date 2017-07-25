@@ -1,20 +1,4 @@
 yum install zip unzip net-tools vim -y
-###JAVA install ###
-if [ ! -e "/opt/jdk1.8.0_131/bin/java" ]
-	then
-		cd /opt/
-		cp /home/vagrant/vb-share/jdk-8u131-linux-x64.tar.gz ./
-		tar xzf jdk-8u131-linux-x64.tar.gz >>/var/log/tar-output.log
-		cd /opt/jdk1.8.0_131/
-		alternatives --install /usr/bin/java java /opt/jdk1.8.0_131/bin/java 2
-		alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_131/bin/jar 2
-		alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_131/bin/javac 2
-		alternatives --set jar /opt/jdk1.8.0_131/bin/jar
-		alternatives --set javac /opt/jdk1.8.0_131/bin/javac
-		echo "export JAVA_HOME=/opt/jdk1.8.0_131" >>/etc/environment
-		echo "export JRE_HOME=/opt/jdk1.8.0_131/jre" >>/etc/environment
-		echo "export PATH=$PATH:/opt/jdk1.8.0_131/bin:/opt/jdk1.8.0_131/jre/bin" >>/etc/environment
-fi
 
 ###ZABBIX###
 yum install mariadb mariadb-server -y
@@ -31,6 +15,15 @@ yum install http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1
 yum install zabbix-web-mysql -y
 sed -i 's@# php_value date.timezone Europe/Riga@php_value date.timezone Europe/Minsk@'  /etc/httpd/conf.d/zabbix.conf
 systemctl start httpd
+
+###J-GATE###
+yum install zabbix-java-gateway -y
+sed -i 's/# JavaGateway=/JavaGateway=111.111.11.11/' /etc/zabbix/zabbix_server.conf;
+sed -i 's/# JavaGatewayPort=10052/JavaGatewayPort=10052/' /etc/zabbix/zabbix_server.conf;
+sed -i 's/# StartJavaPollers=0/StartJavaPollers=5/' /etc/zabbix/zabbix_server.conf;	
+systemctl start zabbix-java-gateway
+systemctl enable zabbix-java-gateway
+systemctl restart zabbix-server
 	
 ###Z-AGENT###
 yum install http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm -y
