@@ -28,6 +28,13 @@ Scenario to test Tomcat availability as well as Application heath
 
 # Task3
 
+Host registered in Zabbix server should have Name = Hostname (not IP)
+Host registered in Zabbix server should belong to ”CloudHosts” group
+Host registered in Zabbix server should be linked with Custom template
+This script should create group “CloudHosts” id it doesn’t exist
 
+<img src="img/3-1.png">
+<img src="img/3-2.png">
+<img src="img/3-3.png">
 
 
