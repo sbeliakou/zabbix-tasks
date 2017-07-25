@@ -95,16 +95,16 @@ For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
 
 # Task. Zabbix API#
 
-** Task: **
+## Task: ##
 You should develop a script (on Python 2.x) which registers given host in Zabbix.
 
-** Testing Infrastructure: **
+### Testing Infrastructure: ###
 
 Vagrantfile to spin up 2 VMs (virtualbox):
 * zabbix server, provisioned by Vagrant provisioner
 * Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner
 
-** Registering Script requirements: **
+### Registering Script requirements: ###
 * Written on Python 2.x
 * Starts at VM startup or on provision phase
 * Host registered in Zabbix server should have Name = Hostname (not IP)

@@ -16,9 +16,10 @@ systemctl start tomcat
 
 yum -y install tomcat-webapps
 
-wget https://bootstrap.pypa.io/get-pip.py -P /tmp
-python /tmp/get-pip.py
-pip install requests
+yum -y install python2-pip
 
-wget
+pip install requests
+pip install configparser2
+
+wget -P https://raw.githubusercontent.com/PaulYurchuk/zabbix-tasks/day2/day2/scripts/zabbix_script.py
 python /tmp/zabbix_script.py
