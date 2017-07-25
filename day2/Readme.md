@@ -22,6 +22,8 @@ script of host1 VM  for tomcat usage is: zabbix-tasks/day2/scripts/tomcat.sh
 
 script of zabbxi_server for gateway usage is(in the end of file): zabbix-tasks/day2/scripts/server.sh
 
+
+####################################
 Task2 
 Web Monitoring with Zabbix
 
