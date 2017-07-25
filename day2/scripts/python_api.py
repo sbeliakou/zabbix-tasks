@@ -156,3 +156,4 @@ customid_group = exist_check(zabbix_ip, 'CloudHosts', 'hostgroup.get').json()['r
 
 if exist_check(zabbix_ip, 'Custom', 'template.get').json()['result'] == []:
     create_template('Custom', zabbix_ip, customid_host, customid_group)
+
