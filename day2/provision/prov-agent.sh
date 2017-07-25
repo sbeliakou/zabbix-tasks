@@ -11,13 +11,13 @@ systemctl start zabbix-agent
 echo "==> Passive checks "
 sed -i '/DebugLevel=3/s/^#//g' /etc/zabbix/zabbix_agentd.conf
 
-sed -i '/Server=127.0.0.1/c\Server=1.1.1.1' /etc/zabbix/zabbix_agentd.conf
+sed -i '/Server=127.0.0.1/c\Server=10.1.1.1' /etc/zabbix/zabbix_agentd.conf
 sed -i '/ListenPort=10050/s/^#//g' /etc/zabbix/zabbix_agentd.conf
 sed -i '/ListenIP=0.0.0.0/s/^#//g' /etc/zabbix/zabbix_agentd.conf
 sed -i '/StartAgents=3/s/^#//g' /etc/zabbix/zabbix_agentd.conf
 
 echo "==> Active checks "
-sed -i '/ServerActive=127.0.0.1/c\ServerActive=1.1.1.1' /etc/zabbix/zabbix_agentd.conf
+sed -i '/ServerActive=127.0.0.1/c\ServerActive=10.1.1.1' /etc/zabbix/zabbix_agentd.conf
 sed -i '/HostnameItem=system.hostname/s/^#//g' /etc/zabbix/zabbix_agentd.conf
 
 echo "==> Installing Zabbix sender"
