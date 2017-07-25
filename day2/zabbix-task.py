@@ -3,14 +3,14 @@ import requests, json
 from requests.auth import HTTPBasicAuth
 
 zabbix_ip = '111.111.11.11'
-zabbix_server = "zabbix-server"
+#zabbix_server = "zabbix-server"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
 
 def post(request):
     headers = {'content-type': 'application/json'}
     return requests.post(
-        "http://" + zabbix_server + "/api_jsonrpc.php",
+        "http://" + zabbix_ip + "/api_jsonrpc.php",
          data=json.dumps(request),
          headers=headers,
          auth=HTTPBasicAuth(zabbix_api_admin_name, zabbix_api_admin_password)
