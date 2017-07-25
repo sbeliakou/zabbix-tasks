@@ -9,12 +9,10 @@
 ###### e) Add VH and change zabbix-server name (ServerName - zabbix-server) - server.sh file
 ###### f) Install zabbix-java-gateway - server.sh file
 ###### g) Change configuration file /etc/zabbix/zabbix_server.conf with custom gateway - server.sh file
-##### Installation host1 with zabbix-agent and tomcat:
+##### Installation host1 with zabbix-agent and python script:
 ###### a) Download and install zabbix-agent - agent.sh
 ###### b) Make changes with zabbix-Server address (ServerActive and Server = 192.168.56.10) - agent.sh
-###### c) Install tomcat and webapp-tomcat - tomcat.sh
-###### d) Add Java_opts block into /etc/tomcat/tomcat.conf - tomcat.sh
-###### e) Add new classname to /etc/tomcat/server.xml - tomcat.sh
-###### f) Download tomcat-catalina-jmx and add it to tomcat's lib - tomcat.sh
-
+###### c) Install pip, requests - agent.sh
+###### d) Download py file from git - agent.sh
+###### e) Change permissions and run it - agent.sh
 

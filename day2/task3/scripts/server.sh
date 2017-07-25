@@ -47,15 +47,6 @@ systemctl start httpd;
 
 
 
-yum install zabbix-java-gateway -y;
-sed -i 's/# JavaGateway=/JavaGateway=127.0.0.1/' /etc/zabbix/zabbix_server.conf;
-sed -i 's/# JavaGatewayPort=10052/JavaGatewayPort=10052/' /etc/zabbix/zabbix_server.conf;
-sed -i 's/# StartJavaPollers=0/StartJavaPollers=5/' /etc/zabbix/zabbix_server.conf;
-systemctl restart zabbix-server
-
-
-
-
 
 
 
