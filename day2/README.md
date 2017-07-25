@@ -71,7 +71,7 @@ Creating trigger
 
 Warning after creating CPU load
 
-<img src="pictures/Screenshot from 2017-07-25 16-11-18.png"
+<img src="pictures/Screenshot from 2017-07-25 16-11-18.png">
 
 #  Task. Zabbix. Web Monitoring with Zabbix
 
