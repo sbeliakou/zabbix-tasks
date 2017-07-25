@@ -36,4 +36,6 @@ Tasks:
 
 <img src="pictures/Screenshot from 2017-07-25 15-44-43.png">
 
+<img src="pictures/Screenshot from 2017-07-25 15-36-43.png">
+
 For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”
