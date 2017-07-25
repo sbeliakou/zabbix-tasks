@@ -68,6 +68,8 @@ Tasks:
 
 Scenario to test Tomcat availability as well as Application heath
 
+<img src="pictures/Screenshot from 2017-07-25 17-09-55.png">
+
 <img src="pictures/Screenshot from 2017-07-25 17-02-52.png">
 
 2. Configure Triggers to alert once WEB resources become unavailable
