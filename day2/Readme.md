@@ -30,8 +30,6 @@ Install Tomcat 7 on 2nd VM
 
 <img src="pictures/Screenshot from 2017-07-25 14-40-27.png">
 
-<img src="pictures/Screenshot from 2017-07-25 14-40-27.png">
-
 <img src="pictures/Screenshot from 2017-07-25 14-45-55.png">
 
 <img src="pictures/Screenshot from 2017-07-25 15-56-22.png">
