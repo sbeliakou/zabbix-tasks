@@ -4,7 +4,7 @@ import json
 import sys
 from requests.auth import HTTPBasicAuth
 
-zabbix_server = "http://zabbix"
+zabbix_server = "zabbix"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
 
@@ -27,6 +27,8 @@ auth_token = post({
     "auth": None,
     "id": 0}
 ).json()["result"]
+
+
 
 def register_host(hostname, ip):
         a = post({
@@ -53,4 +55,8 @@ def register_host(hostname, ip):
             "auth": auth_token,
             "id": 1
         })
-        return a
+        return a.text
+
+print (register_host('test1', '192.168.56.1'))
+
+def retrieve_host()
