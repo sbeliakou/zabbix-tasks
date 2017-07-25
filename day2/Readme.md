@@ -1,5 +1,5 @@
-#Task1
-##Java Monitoring with Java
+Task1
+Java Monitoring with Java
 
 1. Configure Zabbix to examine Java parameters via Java Gateway
 
