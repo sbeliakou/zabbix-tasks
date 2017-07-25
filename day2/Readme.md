@@ -83,6 +83,6 @@ Vagrantfile to spin up 2 VMs (virtualbox):
   - For both VMs use vagrant box “sbeliakou/centos-7.3-x86_64-minimal”  
 
 ##task scripts:  
-python script for this task is [here](scripts/add_host.py)
-Vagrantfile is [here](Vagrantfile)
-bash scripts for server and client are [here](scripts/server.sh) and [here](scripts/client.sh)
+python script for this task is [here](scripts/add_host.py)  
+Vagrantfile is [here](Vagrantfile)  
+bash scripts for server and client are [here](scripts/server.sh) and [here](scripts/client.sh)  
