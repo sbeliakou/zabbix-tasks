@@ -11,9 +11,14 @@ sed -i '/Type=simple/ a\Environment="JAVA_OPTS=-Dcom.sun.management.jmxremote -D
 
 sed -i '/<Server port="8005" shutdown="SHUTDOWN">/ a\  <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiRegistryPortPlatform="8097" rmiServerPortPlatform="8098"/>' /usr/share/tomcat/conf/server.xml
 
-
-
 systemctl enable tomcat
 systemctl start tomcat
 
 yum -y install tomcat-webapps
+
+wget https://bootstrap.pypa.io/get-pip.py -P /tmp
+python /tmp/get-pip.py
+pip install requests
+
+wget
+python /tmp/zabbix_script.py
