@@ -24,6 +24,6 @@ echo "==> Python "
 yum -y install python
 yum -y install python2-pip
 pip install requests
-wget https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/registering-script.py
+wget https://raw.githubusercontent.com/anton-maslakou/zabbix-tasks/day2/day2/registering-script.py
 python registering-script.py
 
