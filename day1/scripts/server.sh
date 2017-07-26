@@ -20,5 +20,5 @@ systemctl start httpd && systemctl enable httpd
 systemctl enable zabbix-server
 
 ###virtual-host###
-cp /home/vagrant/vb-share/virtualh.conf /etc/httpd/conf.d/
+cd /etc/httpd/conf.d/  && wget https://raw.githubusercontent.com/VadzimTarasiuk/cautious-guacamole/master/virtualh.conf && cd -
 systemctl restart httpd
