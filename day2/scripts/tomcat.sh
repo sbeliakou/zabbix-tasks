@@ -20,7 +20,3 @@ echo "==> Starting Tomcat"
 systemctl start tomcat
 systemctl enable tomcat
 
-echo "==> Executing python script"
-yum -y install python
-wget https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/registering-script.py
-python registering-script.py

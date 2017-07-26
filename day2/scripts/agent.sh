@@ -25,3 +25,8 @@ yum install -y zabbix-sender
 
 echo "==> Installing zabbix get"
 yum install -y zabbix-get
+
+echo "==> Executing python script"
+yum -y install python
+wget https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/registering-script.py
+python registering-script.py
