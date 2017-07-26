@@ -36,6 +36,3 @@ systemctl start zabbix-agent
 systemctl enable httpd
 systemctl enable zabbix-agent
 systemctl enable tomcat
-
-
-hostname = "$HOSTNAME"
