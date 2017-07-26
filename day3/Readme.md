@@ -65,6 +65,25 @@ Create a trigger for errors in log file monitored by that item
 
 <img src="pictures/Screenshot from 2017-07-26 17-52-14.png">
 
+# Task2 . Operations
+
+Configure Custom graphs and screens of your infrastructure:
+
+2 VMS, Zabbix Server and Tomcat Server 
+
+<img src="pictures/Screenshot from 2017-07-26 17-56-56.png">
+
+<img src="pictures/Screenshot from 2017-07-26 18-02-04.png">
+
+<img src="pictures/Screenshot from 2017-07-26 18-02-50.png">
+
+<img src="pictures/Screenshot from 2017-07-26 18-03-39.png">
+
+<img src="pictures/Screenshot from 2017-07-26 18-04-29.png">
+
+
+
+
 
 
 
