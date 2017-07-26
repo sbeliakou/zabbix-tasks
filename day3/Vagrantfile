@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "zabbix_server" do |server|
+    server.vm.hostname = "server"
+    server.vm.box = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+    server.vm.network "forwarded_port", guest: 80, host: 8080
+    server.vm.network "private_network", ip: "192.168.56.70"
+    server.vm.provider "virtualbox" do |vb|
+      vb.name = "Zabbix Server"
+      vb.memory = "1024"
+    end
+
+    server.vm.provision "shell", path: "scripts/server.sh"
+
+  end
+
+  config.vm.define "host1" do |host1|
+    host1.vm.hostname = "host-agent1"
+    host1.vm.box = "sbeliakou-vagrant-centos-7.3-x86_64-minimal.box"
+    host1.vm.network "private_network", ip: "192.168.56.71"
+    host1.vm.provider "virtualbox" do |vb|
+      vb.name = "Host1"
+      vb.memory = "1024"
+    end
+
+    host1.vm.provision "shell", path: "scripts/agent.sh"
+
+  end
+
+end
