@@ -13,9 +13,11 @@ mysql -uroot -e "grant all privileges on zabbix.* to zabbix@localhost identified
 zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -pzabbixDB zabbix
 systemctl start zabbix-server 
 systemctl enable zabbix-server
+sed -i '6a RedirectMatch ^/$ http://192.168.56.10/zabbix/' /etc/httpd/conf.d/zabbix.conf
 sed -i -e 's:# php_value date.timezone Europe/Riga:php_value date.timezone Europe/Minsk:g' /etc/httpd/conf.d/zabbix.conf
 systemctl start httpd 
 systemctl enable httpd 
+
 		cat > /etc/zabbix/web/zabbix.conf.php << 'EOL'
 <?php
 // Zabbix GUI configuration file.
@@ -37,4 +39,3 @@ $ZBX_SERVER_NAME = 'zabbix-server';
 
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 EOL
-
