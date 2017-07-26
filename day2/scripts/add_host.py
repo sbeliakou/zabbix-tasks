@@ -4,9 +4,9 @@ from requests.auth import HTTPBasicAuth
 zabbix_server = sys.argv[1]#"192.168.56.105"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
-new_host = sys.argv[2]#'zabbix-client222'
+new_host = sys.argv[2]#'zabbix-client'
 new_group = 'CloudHosts'
-new_template = 'Custom_template'#'asddsa'#'Template App FTP Service'
+new_template = 'Custom_template'
 
 def post(request):
     headers = {'content-type': 'application/json'}
@@ -54,7 +54,7 @@ except:
     },
     "auth": auth_token,
     "id": 1
-}).json()['result'][0]['groupid'])
+    }).json()['result'][0]['groupid'])
 
 
 #########################################
@@ -128,6 +128,6 @@ try:
     },
     "auth": auth_token,
     "id": 1
-}).json()['result']['hostids'][0]
+    }).json()['result']['hostids'][0]
 except Exception as e:
     print "Host already exist"
