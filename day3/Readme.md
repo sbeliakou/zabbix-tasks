@@ -4,11 +4,10 @@
   * Create item and develop custom trigger for log monitoring (you can use httpd or tomcat logs)  
   <img src="images/1-1.png">  
   <img src="images/1-2.png">  
-  <img src="images/1-3.png">  
 
   * Create a trigger for errors in log file monitored by that item  
-  <img src="images/1-4.png">  
-  <img src="images/1-5.png">
+  <img src="images/1-3.png">  
+  <img src="images/1-4.png">
 
 ## Task. Items
 
@@ -82,4 +81,3 @@ Configure Custom graphs and screens of your infrastructure:
 2 VMS, Zabbix Server and Tomcat Server
 
 <img src="images/3-1.png">
-
