@@ -1,6 +1,6 @@
 # Task. Items
 ### Task:
-   Assuming we have 2 servers (VMs) – ZabbixServer and Tomcat (see [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day3/Vagrantfile), see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day3/server.sh), see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day3/agent.sh))  
+   Assuming we have 2 servers (VMs) – ZabbixServer and Tomcat (see [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts3/day3/Vagrantfile), see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts3/day3/scripts/server.sh), see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts3/day3/scripts/agent.sh))  
 
 ### Configure checks and triggers for every check:  
 ### **1.** Simple checks:  
