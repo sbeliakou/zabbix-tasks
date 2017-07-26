@@ -9,13 +9,22 @@
 - JmxItems list
 <img src="Screenshot from 2017-07-25 16-41-50.png">
 
-- Trigger is working properly
+- JMX service is online
 <img src="Screenshot from 2017-07-25 16-42-31.png">
 
-# Task 2 (1. Configure WEB check: Scenario to test Tomcat availability as well as Application heath, Configure Triggers to alert once WEB resources become unavailable)
-
+ - JMX trigger is working properly
 <img src="Screenshot from 2017-07-25 16-49-19.png">
+
+
 <img src="Screenshot from 2017-07-25 16-49-34.png">	
+
+
 <img src="Screenshot from 2017-07-25 17-12-33.png">	
+
+# Task 2 (Configure WEB check: Scenario to test Tomcat availability as well as Application heath, Configure Triggers to alert once WEB resources become unavailable)
+- Web Scenario config
 <img src="Screenshot from 2017-07-25 17-12-53.png">	
+
+# Task 3 (Develop a script (on Python 2.x) which registers given host in Zabbix.)
+- Host is registered after running script
 <img src="Screenshot from 2017-07-25 23-11-23.png">
