@@ -28,7 +28,30 @@ sed -i '/# DBHost=localhost/ a\DBHost=localhost' /etc/zabbix/zabbix_server.conf
 sed -i '/# DBPassword=/ a\DBPassword=zabbix' /etc/zabbix/zabbix_server.conf
 
 echo "***********Initial Zabbix configuration***********"
-cp -f /vagrant/scripts/zabbix.conf.php /etc/zabbix/web/
+cat > /etc/zabbix/web/zabbix.conf.php <<- EOF
+
+<?php
+// Zabbix GUI configuration file.
+global \$DB;
+
+\$DB['TYPE']     = 'MYSQL';
+\$DB['SERVER']   = 'localhost';
+\$DB['PORT']     = '3306';
+\$DB['DATABASE'] = 'zabbix';
+\$DB['USER']     = 'zabbix';
+\$DB['PASSWORD'] = 'zabbix';
+
+// Schema name. Used for IBM DB2 and PostgreSQL.
+\$DB['SCHEMA'] = '';
+
+\$ZBX_SERVER      = 'localhost';
+\$ZBX_SERVER_PORT = '10051';
+\$ZBX_SERVER_NAME = 'Zabbix Server';
+
+\$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
+
+EOF
+
 sed -i 's/Alias \/zabbix \/usr\/share\/zabbix/<VirtualHost *:80>/' /etc/httpd/conf.d/zabbix.conf
 sed -i '/<VirtualHost \*:80>/ a\    ServerName zabbix-server' /etc/httpd/conf.d/zabbix.conf
 sed -i '/ServerName zabbix-server/ a\    DocumentRoot \/usr\/share\/zabbix\/' /etc/httpd/conf.d/zabbix.conf
