@@ -8,15 +8,23 @@ Configure:
 1. Simple checks:
 
 * Zabbix Server WEB availability (80)
+<img src="Screenshot from 2017-07-26 13-12-02.png">
+<img src="Screenshot from 2017-07-26 14-38-45.png">
 * Zabbix DB is available (3306)
+<img src="Screenshot from 2017-07-26 13-17-39.png">
+<img src="Screenshot from 2017-07-26 14-40-05.png">
 * Tomcat availability (80, 8080)
+<img src="Screenshot from 2017-07-26 13-21-26.png">
+<img src="Screenshot from 2017-07-26 14-55-26.png">
+<img src="Screenshot from 2017-07-26 14-40-31.png">
+<img src="Screenshot from 2017-07-26 14-45-24.png">
 * Tomcat Server is available by ssh (22)
+<img src="Screenshot from 2017-07-26 13-23-41.png">
+
 
 2. Calculated Checks:
 
 * CPU Load per Core (1, 5, 15min)
-system.cpu.load[percpu,avg1]
-su - zabbix -c "tail $YOUR-FILE"
 
 3. Internal Checks:
 * How many items are enabled
@@ -29,14 +37,8 @@ su - zabbix -c "tail $YOUR-FILE"
 * Configure Custom graphs and screens of your infrastructure:
 2 VMS, Zabbix Server and Tomcat Server
 
-<img src="Screenshot from 2017-07-26 13-12-02.png">
-<img src="Screenshot from 2017-07-26 13-17-39.png">
-<img src="Screenshot from 2017-07-26 13-21-26.png">
-<img src="Screenshot from 2017-07-26 13-23-41.png">
-<img src="Screenshot from 2017-07-26 14-38-45.png">
-<img src="Screenshot from 2017-07-26 14-40-05.png">
-<img src="Screenshot from 2017-07-26 14-40-31.png">
-<img src="Screenshot from 2017-07-26 14-45-24.png">
+
+
 <img src="Screenshot from 2017-07-26 14-46-53.png">
 <img src="Screenshot from 2017-07-26 14-55-26.png">
 <img src="Screenshot from 2017-07-26 15-37-12.png">
