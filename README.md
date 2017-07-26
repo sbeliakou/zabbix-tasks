@@ -64,6 +64,6 @@ end
 4. Trigger worked properly 
 ![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/images/9.png "")
 ![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/images/10.png "")
-2. Configure triggers to alert once these parameters changed.
+
 
 
