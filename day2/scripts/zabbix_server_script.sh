@@ -1,6 +1,7 @@
 yum install mariadb mariadb-server -y
 /usr/bin/mysql_install_db --user=mysql
 systemctl start mariadb
+systemctl enable mariadb
 mysql -uroot <<QUERY
 create database zabbix character set utf8 collate utf8_bin; 
 grant all privileges on zabbix.* to zabbix@localhost identified by 'password';
@@ -27,4 +28,6 @@ sed -i 's|# JavaGateway=|JavaGateway=192.168.100.101|' /etc/zabbix/zabbix_server
 sed -i 's|# JavaGatewayPort=|JavaGatewayPort=|' /etc/zabbix/zabbix_server.conf
 sed -i 's|# StartJavaPollers=0|StartJavaPollers=5|' /etc/zabbix/zabbix_server.conf
 systemctl restart zabbix-server
+systemctl enable zabbix-server
 systemctl start httpd
+systemctl enable httpd
