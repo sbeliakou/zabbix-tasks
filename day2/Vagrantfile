@@ -28,5 +28,6 @@ Vagrant.configure(2) do |config|
     zabbix.vm.post_up_message = "zabbix vm is loaded"
     zabbix.vm.provision "shell", path: "scripts/zabbix_agent_script.sh"
     zabbix.vm.provision "shell", path: "scripts/tomcat_install.sh"
+    zabbix.vm.provision "shell", path: "scripts/zabbix_ext_agent.sh"
  end
 end

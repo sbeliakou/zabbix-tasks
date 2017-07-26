@@ -21,10 +21,7 @@ echo "  <VirtualHost 192.168.100.101>
   DocumentRoot "/usr/share/zabbix"
   </VirtualHost>
 " >> /etc/httpd/conf/httpd.conf
-yum install zabbix-java-gateway -y
-systemctl start zabbix-java-gateway
-systemctl enable zabbix-java-gateway
-sed -i 's|# JavaGateway=|JavaGateway=192.168.100.101|' /etc/zabbix/zabbix_server.conf
+sed -i 's|# JavaGateway=|JavaGateway=192.168.100.102|' /etc/zabbix/zabbix_server.conf
 sed -i 's|# JavaGatewayPort=|JavaGatewayPort=|' /etc/zabbix/zabbix_server.conf
 sed -i 's|# StartJavaPollers=0|StartJavaPollers=5|' /etc/zabbix/zabbix_server.conf
 systemctl restart zabbix-server
