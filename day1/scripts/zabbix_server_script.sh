@@ -1,6 +1,7 @@
 yum install mariadb mariadb-server -y
 /usr/bin/mysql_install_db --user=mysql
 systemctl start mariadb
+systemctl enable mariadb
 mysql -uroot <<QUERY
 create database zabbix character set utf8 collate utf8_bin; 
 grant all privileges on zabbix.* to zabbix@localhost identified by 'password';
@@ -20,5 +21,5 @@ echo "  <VirtualHost 192.168.100.101>
   DocumentRoot "/usr/share/zabbix"
   </VirtualHost>
 " >> /etc/httpd/conf/httpd.conf
- +systemctl start httpd
 systemctl start httpd
+systemctl enable httpd
