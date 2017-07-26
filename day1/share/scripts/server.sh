@@ -13,7 +13,7 @@ zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -ppassw
 sed -i 's;# DBHost=localhost;DBHost=localhost;g' /etc/zabbix/zabbix_server.conf
 sed -i 's;# DBPassword=;DBPassword=password;g' /etc/zabbix/zabbix_server.conf
 sed -i 's;# php_value date.timezone Europe/Riga;php_value date.timezone Europe/Minsk;g' /etc/httpd/conf.d/zabbix.conf
-echo "<VirtualHost 192.168.56.101>
+echo "<VirtualHost 192.168.56.10>
  DocumentRoot "/usr/share/zabbix"
  ServerName zabbix-server
 </VirtualHost>" >> /etc/httpd/conf/httpd.conf
