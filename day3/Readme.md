@@ -1,45 +1,37 @@
 # Report Here
 
-# Task 1. Java Monitoring with zabbix
+# Task 1. Items in zabbix
 
-Testing Infrastructure:
--Vagrantfile to spin up 2 VMs (virtualbox):
--zabbix server, provisioned by Vagrant provisioner
--Zabbix agents on both VMs, provisioned by Vagrant provisioner
--Install Tomcat 7 on 2nd VM
+Task:
+Assuming we have 2 servers (VMs) – ZabbixServer and Tomcat,
+Configure:
+1. Simple checks:
 
-Tasks:
-1. Configure Zabbix to examine Java parameters via Java Gateway
+Zabbix Server WEB availability (80)
+Zabbix DB is available (3306)
+Tomcat availability (80, 8080)
+Tomcat Server is available by ssh (22)
 
-<img src="pictures/Screenshot from 2017-07-25 15-31-27.png">
+<img src="pictures/Screenshot from 2017-07-26 13-16-41.png">
 
-2. Configure triggers to alert once these parameters changed.
+2. Calculated Checks:
 
-<img src="pictures/Screenshot from 2017-07-25 16-19-12.png">
+CPU Load per Core (1, 5, 15min)
 
-<img src="pictures/Screenshot from 2017-07-25 16-12-46.png">
+<img src="pictures/Screenshot from 2017-07-26 15-09-27.png">
 
--Alert
+3. Internal Checks:
 
-<img src="pictures/Screenshot from 2017-07-25 16-12-57.png">
+How many items are enabled
 
-# Task 2. Web Monitoring with Zabbix
+<img src="pictures/Screenshot from 2017-07-26 15-30-11.png">
 
-Testing Infrastructure:
--Vagrantfile to spin up 2 VMs (virtualbox):
--zabbix server, provisioned by Vagrant provisioner
--Zabbix agents on both VMs, provisioned by Vagrant provisioner
--Install Tomcat 7 on 2nd VM, deploy any “hello world” application
+How many Servers are being monitored
 
-Tasks:
-1. Configure WEB check:
-Scenario to test Tomcat availability as well as Application heath
+<img src="pictures/Screenshot from 2017-07-26 15-31-23.png">
 
-<img src="pictures/Screenshot from 2017-07-25 16-36-19.png">
+Create triggers for every check
 
-<img src="pictures/Screenshot from 2017-07-25 17-12-18.png">
-
-2. Configure Triggers to alert once WEB resources become unavailable
-
-<img src="pictures/Screenshot from 2017-07-25 17-13-16.png">
+<img src="pictures/Screenshot from 2017-07-26 17-26-50.png">
+<img src="pictures/Screenshot from 2017-07-26 17-27-07.png">
 

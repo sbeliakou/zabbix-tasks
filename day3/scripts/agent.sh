@@ -9,7 +9,7 @@
 #yum install -y tomcat;
 #yum install -y tomcat-webapps;
 #yum install -y java-1.8.0-openjdk-devel.x86_64;
-
+yum install -y httpd
 # Tuning JAVA
 #export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.141-1.b16.el7_3.x86_64/jre/
 
@@ -24,7 +24,7 @@
 
 # Starting agent/Check if started
 echo "Zabbix Agent starting..."
-systemctl start zabbix-agent;
+#systemctl start zabbix-agent;
 sleep 2;
 if pgrep -x "zabbix_agentd" > /dev/null
 then
@@ -33,6 +33,9 @@ else
     echo "AGENT IS STOPPED"
 fi
 
+
 #sed '/Environment=/a CLIENTSCRIPT2="hello"' file
 #sed -i 's/Connector address="192.168.56.201" port=/Connector port=/' /opt/apache/tomcat/7.0.62/conf/server.xml
 #systemctl start tomcat
+systemctl start httpd
+systemctl enable httpd
