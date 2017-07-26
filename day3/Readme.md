@@ -47,9 +47,9 @@ Configure:
 
 Create triggers for every check
 
-<img src="pictures/Screenshot from 2017-07-26 17-44-14">
+<img src="pictures/Screenshot from 2017-07-26 17-44-14.png">
 
-<img src="pictures/Screenshot from 2017-07-26 17-44-55">
+<img src="pictures/Screenshot from 2017-07-26 17-44-55.png">
 
 <img src="pictures/Screenshot from 2017-07-26 13-41-16.png">
 
