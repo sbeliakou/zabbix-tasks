@@ -27,7 +27,7 @@ yum install python2-pip.noarch -y
 pip install requests
 
 #Creating unit file to start python script (register, enable, disable host on zabbix)
-if [[ -f /home/vagrant//zabbixhostadd.py ]]; then
+if [[ ! -f /home/vagrant//zabbixhostadd.py ]]; then
  cd /home/vagrant/
  wget https://raw.githubusercontent.com/aion3181/zabbix-tasks/day2/day2/zabbixhostadd.py 
  chmod +x /home/vagrant/zabbixhostadd.py
