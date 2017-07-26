@@ -44,3 +44,13 @@ global \$DB;
 yum install zabbix-get -y;
 systemctl start zabbix-server;
 systemctl start httpd;
+
+
+
+
+
+
+
+
+
+
