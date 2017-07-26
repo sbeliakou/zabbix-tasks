@@ -4,13 +4,13 @@ echo Installing Zabbix Server
 yum -y install http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
 yum -y install mariadb mariadb-server
 /usr/bin/mysql_install_db --user=mysql
+systemctl enable mariadb
 systemctl start mariadb
 yum -y install zabbix-server-mysql zabbix-web-mysql
 sed -i '/# DBPassword=/a DBPassword=zabbixDB' /etc/zabbix/zabbix_server.conf
 mysql -uroot -e "create database zabbix character set utf8 collate utf8_bin;"
 mysql -uroot -e "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbixDB';"
 zcat /usr/share/doc/zabbix-server-mysql-*/create.sql.gz | mysql -uzabbix -pzabbixDB zabbix
-
 
 yum -y install zabbix-java-gateway
 systemctl start zabbix-java-gateway
@@ -20,12 +20,12 @@ sed -i '/# JavaGateway=/aJavaGateway=192.168.56.10' /etc/zabbix/zabbix_server.co
 sed -i '/# JavaGatewayPort=10052/aJavaGatewayPort=10052' /etc/zabbix/zabbix_server.conf
 sed -i '/# StartJavaPollers=0/aStartJavaPollers=5' /etc/zabbix/zabbix_server.conf
 
-
-
 systemctl start zabbix-server 
+systemctl enable zabbix-server 
 sed -i '6a RedirectMatch ^/$ http://192.168.56.10/zabbix/' /etc/httpd/conf.d/zabbix.conf
 sed -i -e 's:# php_value date.timezone Europe/Riga:php_value date.timezone Europe/Minsk:g' /etc/httpd/conf.d/zabbix.conf
 systemctl start httpd 
+systemctl enable httpd 
 		cat > /etc/zabbix/web/zabbix.conf.php << 'EOL'
 <?php
 // Zabbix GUI configuration file.
@@ -47,3 +47,11 @@ $ZBX_SERVER_NAME = 'zabbix-server';
 
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 EOL
+
+
+
+
+
+
+
+
