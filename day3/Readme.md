@@ -9,9 +9,9 @@ Configure:
 
 sol:
 
-all of required checks configured, screen in pdf
+all of required checks configured, screen in d3_t1 pdf
 
 Task 2
 Operations
 
-<b>hey</b>
+Screens of graps and screens attached in d3_t2 pdf
