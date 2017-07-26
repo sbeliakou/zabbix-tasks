@@ -27,7 +27,7 @@ yum install python2-pip.noarch -y
 pip install requests
 
 #Creating unit file to start python script (register, enable, disable host on zabbix)
-if [[ ! -f /home/vagrant//zabbixhostadd.py ]]; then
+if [[ ! -f /home/vagrant/zabbixhostadd.py ]]; then
  cd /home/vagrant/
  wget https://raw.githubusercontent.com/aion3181/zabbix-tasks/day2/day2/zabbixhostadd.py 
  chmod +x /home/vagrant/zabbixhostadd.py
@@ -47,23 +47,6 @@ ExecStop=/usr/bin/python /home/vagrant/zabbixhostadd.py down
 Type=forking
 PIDFile=path_to_pidfile
 RemainAfterExit=yes
-
-[Install]
-WantedBy=default.target
-EOL
-
-systemctl daemon-reload
-systemctl enable mypy.service
-systemctl start mypy.service
-fi
-fi
-EOL
-
-systemctl daemon-reload
-systemctl enable mypy.service
-systemctl start mypy.service
-fi
-fi
 
 [Install]
 WantedBy=default.target
