@@ -17,6 +17,8 @@ sed -i '/# DBPassword=/ a\DBPassword=zabbix' /etc/zabbix/zabbix_server.conf
 sed -i '/# DBHost=localhost/ a\DBHost=localhost' /etc/zabbix/zabbix_server.conf
 sed -i 's/DBUser=zabbix/DBUser=zabbix/g' /etc/zabbix/zabbix_server.conf
 sed -i 's/DBName=zabbix/DBName=zabbix/g' /etc/zabbix/zabbix_server.conf
+sed -i '/# JavaGateway=/ a\JavaGateway=192.168.56.10' /etc/zabbix/zabbix_server.conf
+sed -i '/# StartJavaPollers=0/ a\StartJavaPollers=5' /etc/zabbix/zabbix_server.conf
 sed -i 's;# php_value date.timezone Europe/Riga;php_value date.timezone Europe/Minsk;g' /etc/httpd/conf.d/zabbix.conf
 
 cat > /etc/zabbix/web/zabbix.conf.php <<- EOF
@@ -52,9 +54,13 @@ cat > /etc/httpd/conf.d/virthost.conf <<- EOF
 
 EOF
 
-yum install zabbix-get -y
+yum install zabbix-java-gateway -y
 
+systemctl enable zabbix-java-gateway
+systemctl enable zabbix-server
+systemctl enable httpd
 systemctl start zabbix-server
 systemctl start httpd
+systemctl start zabbix-java-gateway
 
 
