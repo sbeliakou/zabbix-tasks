@@ -5,3 +5,8 @@ sed -i 's/Server=127.0.0.1/Server=192.168.56.10/g' /etc/zabbix/zabbix_agentd.con
 sed -i 's/ServerActive=127.0.0.1/ServerActive=192.168.56.10/g' /etc/zabbix/zabbix_agentd.conf
 systemctl start zabbix-agent
 
+yum -y install python-pip
+sudo pip install requests
+wget https://raw.githubusercontent.com/Asemirski/zabbix-tasks/asd2/day2/hostCreator.py
+chmod +x hostCreator.py
+python hostCreator.py
