@@ -14,14 +14,14 @@
 <img src="pictures/Screenshot from 2017-07-26 16-06-08.png">
 
 
-## custom trigger for log monitoring
+## Custom trigger for log monitoring
 <img src="pictures/Screenshot from 2017-07-26 16-10-53.png">
 
 - custom trigger values
 <img src="pictures/Screenshot from 2017-07-26 16-18-54.png">
 
 
-## custom trigger for log monitoring
+## Custom trigger for log monitoring
 - trigger result for tomcat
 <img src="pictures/Screenshot from 2017-07-26 19-53-32.png">
 
