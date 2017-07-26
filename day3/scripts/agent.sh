@@ -12,7 +12,6 @@ sed -i 's@# ListenPort=10050@ListenPort=10050@' /etc/zabbix/zabbix_agentd.conf
 sed -i 's@Hostname=Zabbix server@Hostname=zabbix1@' /etc/zabbix/zabbix_agentd.conf
 
 systemctl start zabbix-agent
-systemctl enable zabbix-agent
 
 echo "### Install Tomcat 7 ###"
 yum install tomcat tomcat-webapps -y
@@ -48,9 +47,17 @@ wget https://bootstrap.pypa.io/get-pip.py -P /tmp
 python /tmp/get-pip.py
 pip install requests
 
-echo "### Download and run python script ###"
+echo "### Download and run python scripts ###"
 wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski3/day3/scripts/script.py -P /tmp
+wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski3/day3/scripts/change_host_status.py -P /tmp
 python /tmp/script.py
 
+echo "### Making changes to zabbix agent systemd unit file if it needs ###"
+sed -i '/ExecStart=\/usr\/sbin\/zabbix_agentd -c $CONFFILE/a\
+ExecStart=/usr/bin/python /tmp/change_host_status.py 0' /usr/lib/systemd/system/zabbix-agent.service  
+sed -i '/ExecStop=/bin/kill -SIGTERM $MAINPID/a\
+ExecStop=/usr/bin/python /tmp/change_host_status.py 1' /usr/lib/systemd/system/zabbix-agent.service
+systemctl daemon-reload
+systemctl enable zabbix-agent
 
 
