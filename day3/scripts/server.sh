@@ -28,7 +28,30 @@ sed -i '/# DBHost=localhost/ a\DBHost=localhost' /etc/zabbix/zabbix_server.conf
 sed -i '/# DBPassword=/ a\DBPassword=zabbix' /etc/zabbix/zabbix_server.conf
 
 echo "***********Initial Zabbix configuration***********"
-cp -f /vagrant/scripts/zabbix.conf.php /etc/zabbix/web/
+cat > /etc/zabbix/web/zabbix.conf.php <<- EOF
+
+<?php
+// Zabbix GUI configuration file.
+global \$DB;
+
+\$DB['TYPE']     = 'MYSQL';
+\$DB['SERVER']   = 'localhost';
+\$DB['PORT']     = '3306';
+\$DB['DATABASE'] = 'zabbix';
+\$DB['USER']     = 'zabbix';
+\$DB['PASSWORD'] = 'zabbix';
+
+// Schema name. Used for IBM DB2 and PostgreSQL.
+\$DB['SCHEMA'] = '';
+
+\$ZBX_SERVER      = 'localhost';
+\$ZBX_SERVER_PORT = '10051';
+\$ZBX_SERVER_NAME = 'Zabbix Server';
+
+\$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
+
+EOF
+
 sed -i 's/Alias \/zabbix \/usr\/share\/zabbix/<VirtualHost *:80>/' /etc/httpd/conf.d/zabbix.conf
 sed -i '/<VirtualHost \*:80>/ a\    ServerName zabbix-server' /etc/httpd/conf.d/zabbix.conf
 sed -i '/ServerName zabbix-server/ a\    DocumentRoot \/usr\/share\/zabbix\/' /etc/httpd/conf.d/zabbix.conf
@@ -45,7 +68,20 @@ echo "***********Starting and enabling Front-end***********"
 systemctl enable httpd
 systemctl start httpd
 
+echo "***********Installing, Starting and Enabling Zabbix Agent***********"
+yum install zabbix-agent -y
+systemctl enable zabbix-agent
+systemctl start zabbix-agent
+
+echo "***********Install and Configure Zabbix Java G/W***********"
+yum install zabbix-java-gateway -y
+sed -i '/# JavaGateway=/ a\JavaGateway=127.0.0.1' /etc/zabbix/zabbix_server.conf
+sed -i '/# StartJavaPollers=0/ a\StartJavaPollers=5' /etc/zabbix/zabbix_server.conf
+systemctl enable zabbix-java-gateway
+systemctl start zabbix-java-gateway
+systemctl restart zabbix-server
+
 echo "+++++++++++++++++++++++++++++"
 echo "You can connect to Zabbix server via $(hostname -I | cut -f2 | awk '{print $2}'):80"
-echo "or you can add '192.168.56.110 zabbix-server' to your hosts file and use http://zabbix-server instead of 'ip:port'"
+echo "or you can add '192.168.56.10 zabbix-server' to your hosts file and use http://zabbix-server instead of 'ip:port'"
 echo "+++++++++++++++++++++++++++++"
