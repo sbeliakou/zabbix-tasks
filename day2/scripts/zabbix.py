@@ -1,4 +1,4 @@
-import sys, requests, json
+import socket, sys, requests, json
 from requests.auth import HTTPBasicAuth
 
 
@@ -109,11 +109,11 @@ def host_create(hostname, ip, groupid, templid):
     else:
         return host_get[0]['hostid']
 
-zabbix_server = "192.168.56.110"
+zabbix_server = "192.168.56.10"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
-hastname = str(sys.argv[1])
-ip = str(sys.argv[2])
+hastname = socket.gethostname()
+ip = str(sys.argv[1])
 groupname = 'CloudHosts'
 template = 'Template Custom'
 

@@ -8,8 +8,8 @@ echo "***********Installing Zabbix Agent***********"
 yum install zabbix-agent -y
 
 echo "***********Configuring Zabbix Agent***********"
-sed -i 's/Server=127.0.0.1/Server=192.168.56.110/' /etc/zabbix/zabbix_agentd.conf
-sed -i 's/ServerActive=127.0.0.1/ServerActive=192.168.56.110/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/Server=127.0.0.1/Server=192.168.56.10/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/ServerActive=127.0.0.1/ServerActive=192.168.56.10/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/Hostname=Zabbix server/Hostname=host-agent1/' /etc/zabbix/zabbix_agentd.conf
 
 echo "***********Starting and Enabling Zabbix Agent service***********"
@@ -27,7 +27,7 @@ cp /vagrant/hello.war /usr/share/tomcat/webapps/
 
 echo "***********Configuring JMX***********"
 sed -i '/<Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" \/>/ a\  <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiRegistryPortPlatform="8097" rmiServerPortPlatform="8098" \/>' /usr/share/tomcat/conf/server.xml
-sed -i '/#JAVA_OPTS="-Xminf0.1 -Xmaxf0.3"/ a\JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.111 -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false"' /usr/share/tomcat/conf/tomcat.conf
+sed -i '/#JAVA_OPTS="-Xminf0.1 -Xmaxf0.3"/ a\JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.11 -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.local.only=false"' /usr/share/tomcat/conf/tomcat.conf
 
 echo "***********Starting and Enabling Tomcat***********"
 systemctl enable tomcat
@@ -36,4 +36,4 @@ systemctl start tomcat
 echo "***********Running Python script***********"
 yum install python2-pip -y
 pip install requests
-python /vagrant/scripts/zabbix.py host-agent1 192.168.56.111
+python /vagrant/scripts/zabbix.py 192.168.56.11

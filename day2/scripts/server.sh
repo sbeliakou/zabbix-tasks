@@ -83,5 +83,5 @@ systemctl restart zabbix-server
 
 echo "+++++++++++++++++++++++++++++"
 echo "You can connect to Zabbix server via $(hostname -I | cut -f2 | awk '{print $2}'):80"
-echo "or you can add '192.168.56.110 zabbix-server' to your hosts file and use http://zabbix-server instead of 'ip:port'"
+echo "or you can add '192.168.56.10 zabbix-server' to your hosts file and use http://zabbix-server instead of 'ip:port'"
 echo "+++++++++++++++++++++++++++++"
