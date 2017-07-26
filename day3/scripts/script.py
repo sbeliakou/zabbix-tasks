@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import requests, json
+import requests, json, socket
 from requests.auth import HTTPBasicAuth
 
 zabbix_server = "192.168.56.10"
