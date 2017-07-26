@@ -17,9 +17,7 @@ def post(request):
     return requests.post("http://" + zabbix_server + "/api_jsonrpc.php",
                          data=json.dumps(request),
                          headers=headers,
-                         auth=HTTPBasicAuth(zabbix_api_admin_name, zabbix_api_admin_password)
-                        )
-
+                         auth=HTTPBasicAuth(zabbix_api_admin_name, zabbix_api_admin_password))
 auth_token = post({
     "jsonrpc": "2.0",
     "method": "user.login",
@@ -31,25 +29,27 @@ auth_token = post({
     "id": 0
 }
 ).json()["result"]
-print auth_token
-
+print "Auth token " + auth_token
+group_id = None
+template_id = None
 try:
-    get_hg=post({
+    group_id = post({
         "jsonrpc": "2.0",
         "method": "hostgroup.get",
         "params": {
             "output": "extend",
             "filter": {
                 "name": [
-                    "CloudHosts"
+                    hgname
                 ]
             }
         },
         "auth": auth_token,
         "id": 1
-    }).json()["result"][0]["name"]
+    }).json()["result"][0]["groupid"]
+    print "Group id " + group_id
 except IndexError:
-    group_token = post({
+    group_id = post({
         "jsonrpc": "2.0",
         "method": "hostgroup.create",
         "params": {
@@ -58,51 +58,88 @@ except IndexError:
         "auth": auth_token,
         "id": 1
     }).json()["result"]["groupids"][0]
-    print group_token
-
-    template_token = post(
+    print "Group id in exception " + group_id
+print "Check group id " + group_id
+try:
+    template_id = post({
+        "jsonrpc": "2.0",
+        "method": "template.get",
+        "params": {
+            "output": "extend",
+            "filter": {
+                "host": [
+                    tpname
+                ]
+            }
+        },
+        "auth": auth_token,
+        "id": 1
+    }).json()["result"]["templateid"]
+except IndexError:
+    template_id = post(
         {
             "jsonrpc": "2.0",
             "method": "template.create",
             "params": {
                 "host": tpname,
                 "groups": {
-                    "groupid": group_token
+                    "groupid": group_id
                 },
             },
             "auth": auth_token,
             "id": 1
         }
     ).json()["result"]["templateids"][0]
-    print template_token
-
-    host_creator = post({
-        "jsonrpc": "2.0",
-        "method": "host.create",
-        "params": {
-            "host": hostname,
-            "interfaces": [
-                {
-                    "type": 1,
-                    "main": 1,
-                    "useip": 1,
-                    "ip": ip,
-                    "dns": "",
-                    "port": "10050"
-                }
-            ],
-            "groups": [
-                {
-                    "groupid": group_token
-                }
-            ],
-            "templates": [
-                {
-                    "templateid": template_token
-                }
-            ],
-        },
-        "auth": auth_token,
-        "id": 1
-    })
-    print "done!"
+print "Check tpid " + template_id
+host_creator = post({
+    "jsonrpc": "2.0",
+    "method": "host.create",
+    "params": {
+        "host": hostname,
+        "groups": [
+            {
+                "groupid": group_id
+            }
+        ],
+        "templates": [
+            {
+                "templateid": template_id
+            }
+        ],
+    },
+    "auth": auth_token,
+    "id": 1
+}).json()["result"]["hostids"][0]
+print "Host created!"
+host_interface_id = post({
+    "jsonrpc": "2.0",
+    "method": "hostinterface.create",
+    "params": {
+        "hostid": host_creator,
+        "dns": "",
+        "ip": ip,
+        "main": 0,
+        "port": "10050",
+        "type": 1,
+        "useip": 1
+    },
+    "auth": "038e1d7b1735c6a5436ee9eae095879e",
+    "id": 1
+}).json()["result"]["interfaceids"][0]
+print "Host interface created"
+item_creator = post({
+    "jsonrpc": "2.0",
+    "method": "item.create",
+    "params": {
+        "name": "Zbx check",
+        "key_": "agent.hostname",
+        "hostid": host_creator,
+        "type": 0,
+        "value_type": 3,
+        "interfaceid": host_interface_id,
+        "delay": 30
+    },
+    "auth": "038e1d7b1735c6a5436ee9eae095879e",
+    "id": 1
+})
+print "End"
