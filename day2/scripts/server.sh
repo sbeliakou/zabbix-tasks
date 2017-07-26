@@ -59,7 +59,9 @@ yum install zabbix-java-gateway -y
 systemctl enable zabbix-java-gateway
 systemctl enable zabbix-server
 systemctl enable httpd
+systemctl enable zabbiz-agent
 systemctl start zabbix-server
 systemctl start httpd
 systemctl start zabbix-java-gateway
+systemctl start zabbiz-agent
 
