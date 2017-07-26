@@ -75,15 +75,12 @@
 
 **2.** Configure Triggers to alert once WEB resources become unavailable  
    *Create trigger for web scenario*  
-    <img src="pic/30.png">
-    
-    *Check that trigger works*  
-    <img src="pic/30.png">
-    
-    *Create trigger for web scenario*  
-    <img src="pic/28.png">
-    <img src="pic/31.png">
-    <img src="pic/29.png">
+   <img src="pic/30.png">
+
+   *Check that trigger works*  
+   <img src="pic/28.png">
+   <img src="pic/31.png">
+   <img src="pic/29.png">
 
 
 
