@@ -1,14 +1,14 @@
 import os, requests, json, sys
 from requests.auth import HTTPBasicAuth
 
-zabbix_server = "10.1.1.1"
+zabbix_server = "192.168.56.10"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
 
 hgname = "CloudHosts"
 tpname = "Custom Template"
 hostname = "Hostname"
-ip = "10.1.1.2"
+ip = "192.168.56.11"
 
 
 def post(request):

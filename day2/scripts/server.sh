@@ -62,7 +62,7 @@ systemctl start httpd
 
 echo "==> Installing Java-gateway"
 yum install zabbix-java-gateway -y
-sed -i 's/# JavaGateway=/JavaGateway=10.1.1.1/' /etc/zabbix/zabbix_server.conf
+sed -i 's/# JavaGateway=/JavaGateway=192.168.56.10/' /etc/zabbix/zabbix_server.conf
 sed -i 's/# JavaGatewayPort=10052/JavaGatewayPort=10052/' /etc/zabbix/zabbix_server.conf
 sed -i 's/# StartJavaPollers=0/StartJavaPollers=5/' /etc/zabbix/zabbix_server.conf
 systemctl start zabbix-java-gateway

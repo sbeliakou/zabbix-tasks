@@ -14,9 +14,16 @@ sed -i '/<Listener className="org.apache.catalina.core.ThreadLocalLeakPrevention
 
 echo "==> Adding JAVA_OPTS"
 sed -i '/#JAVA_OPTS="-Xminf0.1 -Xmaxf0.3"/a\
-JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=10.1.1.2 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"' /etc/tomcat/tomcat.conf
+JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.11 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"' /etc/tomcat/tomcat.conf
 
 echo "==> Starting Tomcat"
 systemctl start tomcat
 systemctl enable tomcat
+
+echo "==> Python "
+yum -y install python
+yum -y install python2-pip
+pip install requests
+wget https://github.com/anton-maslakou/zabbix-tasks/blob/day2/day2/registering-script.py
+python registering-script.py
 
