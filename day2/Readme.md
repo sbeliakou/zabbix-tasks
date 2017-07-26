@@ -2,10 +2,10 @@
 ### Task:  
    You should install and configure Zabbix server and agents.  
 ### Testing Infrastructure:   
-   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/Vagrantfile) to spin up 2 VMs (virtualbox):
-  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/server.sh)  
-  * *Zabbix agents on both VMs, provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/agent.sh)  
-  * *Install Tomcat 7 on 2nd VM* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/agent.sh)  
+   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/Vagrantfile) to spin up 2 VMs (virtualbox):
+  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/server.sh)  
+  * *Zabbix agents on both VMs, provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/agent.sh)  
+  * *Install Tomcat 7 on 2nd VM* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/agent.sh)  
     
 ### Tasks:
 **1.** Configure Zabbix to examine Java parameters via Java Gateway (http://jmxmonitor.sourceforge.net/jmx.html)  
@@ -53,10 +53,10 @@
 
 # Task. Web Monitoring with Zabbix  
 ### Testing Infrastructure:  
-   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/Vagrantfile) to spin up 2 VMs (virtualbox):  
-  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/server.sh)  
-  * *Zabbix agents on both VMs, provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/agent.sh)  
-  * *Install Tomcat 7 on 2nd VM, deploy any “hello world” application* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/agent.sh)  
+   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/Vagrantfile) to spin up 2 VMs (virtualbox):  
+  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/server.sh)  
+  * *Zabbix agents on both VMs, provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/agent.sh)  
+  * *Install Tomcat 7 on 2nd VM, deploy any “hello world” application* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/agent.sh)  
 
 ### Tasks:
 **1.** Configure WEB check:  
@@ -89,9 +89,9 @@
    You should develop a script (on Python 2.x) which registers given host in Zabbix.  
 
 ### Testing Infrastructure:  
-   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/Vagrantfile) to spin up 2 VMs (virtualbox):  
-  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/server.sh)  
-  * *Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/agent.sh) and Python script [zabbix.py](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts/day2/scripts/zabbix.py)  
+   [Vagrantfile](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/Vagrantfile) to spin up 2 VMs (virtualbox):  
+  * *zabbix server, provisioned by Vagrant provisioner* - see [server.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/server.sh)  
+  * *Linux VM with zabbix agent, script for registration on zabbix server, all provisioned by Vagrant provisioner* - see [agent.sh](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/agent.sh) and Python script [zabbix.py](https://github.com/akonchyts/zabbix-tasks/blob/akonchyts2/day2/scripts/zabbix.py)  
 
 ### Registering Script requirements:  
   * *Written on Python 2.x*  
