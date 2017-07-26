@@ -56,7 +56,7 @@ Configure:
 
  * Configure Custom graphs and screens of your infrastructure:
 2 VMS, Zabbix Server and Tomcat Server
-img src="Screenshot from 2017-07-26 17-15-02.png">
+<img src="Screenshot from 2017-07-26 17-15-02.png">
 <img src="Screenshot from 2017-07-26 17-15-28.png">
 <img src="Screenshot from 2017-07-26 17-21-21.png">
 <img src="Screenshot from 2017-07-26 17-21-47.png">
