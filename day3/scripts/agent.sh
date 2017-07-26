@@ -14,3 +14,4 @@ sed -i ';# PidFile=/tmp/zabbix_agentd.pid; a;PidFile=/var/run/zabbix/zabbix_agen
 
 systemctl enable zabbix-agent
 systemctl start zabbix-agent
+

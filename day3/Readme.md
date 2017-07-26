@@ -1,3 +1,13 @@
+# Used Scripts
+
+[Vagrantfile](https://github.com/bubalush/zabbix-tasks/blob/ndolya_day3/day3/Vagrantfile)- Vagrantfile to spin up 2 VMs
+
+[agent.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day3/day3/scripts/agent.sh) - Install Zabbix-agent
+
+[server.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day3/day3/scripts/server.sh) - Install Zabbix-server
+
+[tomcat.sh](https://github.com/bubalush/zabbix-tasks/tree/ndolya_day3/day3/scripts/tomcat.sh)- Install Tomcat server and Apache httpd
+
 # Task 1. Items
 
 Task:
