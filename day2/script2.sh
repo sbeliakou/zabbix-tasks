@@ -74,10 +74,3 @@ systemctl enable mypy.service
 systemctl start mypy.service
 fi
 fi
-EOL
-
-systemctl daemon-reload
-systemctl enable mypy.service
-systemctl start mypy.service
-fi
-fi
