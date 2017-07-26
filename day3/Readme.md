@@ -4,7 +4,7 @@
 
 ## Assuming we have 2 servers (VMs) – ZabbixServer and Tomcat ##
 
-** Configure: **
+## Configure: ##
 
 ## 1. Simple checks: ##
 
@@ -15,7 +15,7 @@
 
 <img src="pictures/Screenshot from 2017-07-26 16-57-27.png">
 
-** Where "Value 0 - service unavailable, 1 - available" **
+## Where "Value 0 - service unavailable, 1 - available" ##
 
 <img src="pictures/Screenshot from 2017-07-26 16-58-08.png">
 
@@ -59,7 +59,7 @@ CPU Load per Core (1, 5, 15min)
 
 ## Task: ##
 
-** Configure Custom graphs and screens of your infrastructure: **
+## Configure Custom graphs and screens of your infrastructure: ##
 
 <img src="pictures/Screenshot from 2017-07-26 18-30-30.png">
 
@@ -73,4 +73,5 @@ CPU Load per Core (1, 5, 15min)
 
 <img src="pictures/Screenshot from 2017-07-26 18-53-02.png">
 
-* 2 VMS, Zabbix Server and Tomcat Server
+
+2 VMS, Zabbix Server and Tomcat Server
