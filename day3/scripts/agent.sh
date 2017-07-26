@@ -49,7 +49,7 @@ python /tmp/get-pip.py
 pip install requests
 
 echo "### Download and run python script ###"
-wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski2/day2/scripts/script.py -P /tmp
+wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski3/day3/scripts/script.py -P /tmp
 python /tmp/script.py
 
 
