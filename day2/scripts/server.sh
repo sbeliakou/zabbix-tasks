@@ -56,6 +56,7 @@ echo "### Install zabbix-web-mysql ###"
 </VirtualHost>
 EOT
 	systemctl start httpd
+	systemctl enable httpd
 	
 echo "### Install zabbix agent ###"
 	yum install zabbix-agent -y > /dev/null
