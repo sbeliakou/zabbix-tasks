@@ -10,7 +10,7 @@ systemctl start zabbix-agent
 systemctl enabled zabbix-agent
 yum -y install tomcat tomcat-webapps -y
 sed -i '35a <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener" rmiRegistryPortPlatform="8097" rmiServerPortPlatform="8098" />' /usr/share/tomcat/conf/server.xml
-sed -i JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.71 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=8097 -Dcom.sun.management.jmxremote.rmi.port=8098 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" /usr/share/tomcat/conf/tomcat.conf
+echo 'JAVA_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=192.168.56.71 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.port=8097 -Dcom.sun.management.jmxremote.rmi.port=8098 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"' >> /usr/share/tomcat/conf/tomcat.conf
 cd /usr/share/tomcat/lib/
 wget http://central.maven.org/maven2/org/apache/tomcat/tomcat-catalina-jmx-remote/7.0.69/tomcat-catalina-jmx-remote-7.0.69.jar
 cd /usr/share/tomcat/webapps/
