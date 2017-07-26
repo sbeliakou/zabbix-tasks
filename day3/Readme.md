@@ -45,3 +45,15 @@ Configure:
 <img src="pictures/Screenshot from 2017-07-26 17-36-22.png">
 
 <img src="pictures/Screenshot from 2017-07-26 17-36-34.png">
+
+# 5. Task. Operations
+
+Task:
+Configure Custom graphs and screens of your infrastructure:
+2 VMS, Zabbix Server and Tomcat Server 
+
+-Custom graphs
+<img src="pictures/Screenshot from 2017-07-26 18-01-49.png">
+
+-Custom screen
+<img src="pictures/Screenshot from 2017-07-26 18-10-39.png">
