@@ -1,5 +1,3 @@
-#!bin/bash
-
 set -x
 yum -y install mariadb mariadb-server
 /usr/bin/mysql_install_db --user=mysql
