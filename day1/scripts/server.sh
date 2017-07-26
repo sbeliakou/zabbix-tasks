@@ -33,7 +33,7 @@ echo "===> Configuring PHP settings"
 sed -i 's;# php_value date.timezone Europe/Riga;php_value date.timezone Europe/Minsk;g' /etc/httpd/conf.d/zabbix.conf
 
 echo "==> Starting Front-end "
-echo "<VirtualHost 192.168.56.101>
+echo "<VirtualHost 192.168.56.10>
  DocumentRoot "/usr/share/zabbix"
  ServerName zabbix-server
 </VirtualHost>" >> /etc/httpd/conf/httpd.conf
@@ -59,15 +59,4 @@ global \$DB;
 \$ZBX_SERVER_NAME = 'Zabbix Server';
 
 \$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;" > /etc/zabbix/web/zabbix.conf.php
-
-echo "===> Installing Zabbix Agent"
-yum install -y zabbix-agent
-echo "==> Starting Zabbix Agent"
-systemctl start zabbix-agent
-
-echo "==> Installing Zabbix sender"
-yum install zabbix-sender
-
-echo "==> Installing zabbix get"
-yum install -y zabbix-get
 
