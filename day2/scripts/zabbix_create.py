@@ -130,6 +130,9 @@ def register_host(hostname, ip, group, template):
                 }).json()["result"][0]['hostid']
          print('Host already exist:'+'hostID='+str(r))
 
+    else:
+        print('Host is created')
+
 
 groupid=group_create(groupname)
 templateid=template_create(templatename,groupid)
