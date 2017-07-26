@@ -85,9 +85,13 @@ Configure Custom graphs and screens of your infrastructure:
 
 <img src="pictures/Screenshot from 2017-07-26 18-02-04.png">
 
+<img src="pictures/Screenshot from 2017-07-26 18-22-20.png">
+
 <img src="pictures/Screenshot from 2017-07-26 18-02-50.png">
 
 <img src="pictures/Screenshot from 2017-07-26 18-03-39.png">
+
+<img src="pictures/Screenshot from 2017-07-26 18-24-22.png">
 
 <img src="pictures/Screenshot from 2017-07-26 18-04-29.png">
 
