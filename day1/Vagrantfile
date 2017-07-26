@@ -55,6 +55,7 @@ $ZBX_SERVER_NAME = 'Zabbix Server';
 $IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 EOT
 	systemctl start zabbix-server
+	systemctl enable zabbix-server
 	
 	echo "###Install zabbix-web-mysql###"
 	yum install zabbix-web-mysql -y  > /dev/null
@@ -66,6 +67,7 @@ EOT
 </VirtualHost>
 EOT
 	systemctl start httpd
+	systemctl enable httpd	
 	
 	echo "###Install zabbix agent###"
 	yum install zabbix-agent -y > /dev/null
