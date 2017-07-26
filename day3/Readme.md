@@ -30,7 +30,7 @@ Configure:
 
 <img src="pictures/Screenshot from 2017-07-26 15-31-23.png">
 
-# Create triggers for every check
+-Create triggers for every check
 
 <img src="pictures/Screenshot from 2017-07-26 17-26-50.png">
 <img src="pictures/Screenshot from 2017-07-26 17-27-07.png">
