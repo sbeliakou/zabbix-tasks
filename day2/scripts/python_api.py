@@ -6,7 +6,7 @@ from requests.auth import HTTPBasicAuth
 zabbix_server = "zabbix"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
-zabbix_ip = '192.168.56.200'
+zabbix_ip = '192.168.56.201'
 
 def post(request):
     headers = {'content-type': 'application/json'}
