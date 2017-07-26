@@ -10,10 +10,10 @@ __1. Simple checks:__
 <img src="img/add1-2.png">
 
 __The result (tomcat only):__
-* for **vagrant halt agent** command:
+* for full down of virtual host command:
 <img src="img/1-1.png">
 
-* sshd daemon only:
+* **sshd** daemon down only:
 <img src="img/1-2.png">
 <img src="img/1-3.png">
 
