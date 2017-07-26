@@ -1,6 +1,6 @@
 # Task1
 
-** 1. Simple checks: **
+__1. Simple checks:__
 * Zabbix Server WEB availability (80)
 * Zabbix DB is available (3306)
 * Tomcat availability (80, 8080)
@@ -9,7 +9,7 @@
 <img src="img/add1-1.png">
 <img src="img/add1-2.png">
 
-** The result (tomcat only): **
+__The result (tomcat only):__
 
 <img src="img/1-1.png">
 <img src="img/1-2.png">
