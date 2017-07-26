@@ -21,6 +21,12 @@ sed -i 's;# JavaGateway=;JavaGateway=127.0.0.1;g' /etc/zabbix/zabbix_server.conf
 sed -i 's;# JavaGatewayPort;JavaGatewayPort;g' /etc/zabbix/zabbix_server.conf
 sed -i 's;# StartJavaPollers=0;StartJavaPollers=5;g' /etc/zabbix/zabbix_server.conf
 sed -i 's;# php_value date.timezone Europe/Riga;php_value date.timezone Europe/Minsk;g' /etc/httpd/conf.d/zabbix.conf
+
+echo "<VirtualHost *80>
+ DocumentRoot "/usr/share/zabbix"
+ ServerName zabbix-server
+</VirtualHost>" >> /etc/httpd/conf/httpd.conf
+
 systemctl start zabbix-server
 systemctl start zabbix-java-gateway
 systemctl enable zabbix-server

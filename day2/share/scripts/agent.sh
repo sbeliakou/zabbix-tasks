@@ -21,5 +21,5 @@ sed -i 's;"SHUTDOWN">;"SHUTDOWN"> \
 
 echo 'JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.rmi.port=12346 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"' >> /usr/share/tomcat/conf/tomcat.conf
 chmod +x /share/scripts/register.py
-python /share/scripts/register.py 192.168.56.101/zabbix Admin zabbix CloudHosts "Custom template" Hostname 192.168.56.111
+python /share/scripts/register.py 192.168.56.10/zabbix Admin zabbix CloudHosts "Custom template" Hostname 192.168.56.11
 
