@@ -74,7 +74,7 @@ try:
         },
         "auth": auth_token,
         "id": 1
-    }).json()["result"]["templateid"]
+    }).json()["result"][0]["templateid"]
 except IndexError:
     template_id = post(
         {
@@ -91,11 +91,21 @@ except IndexError:
         }
     ).json()["result"]["templateids"][0]
 print "Check tpid " + template_id
-host_creator = post({
+host_id = post({
     "jsonrpc": "2.0",
     "method": "host.create",
     "params": {
         "host": hostname,
+        "interfaces": [
+            {
+                "type": 1,
+                "main": 1,
+                "useip": 1,
+                "ip": "127.0.0.1",
+                "dns": "",
+                "port": "10050"
+            }
+        ],
         "groups": [
             {
                 "groupid": group_id
@@ -111,11 +121,11 @@ host_creator = post({
     "id": 1
 }).json()["result"]["hostids"][0]
 print "Host created!"
-host_interface_id = post({
+host_zbx_interface_id = post({
     "jsonrpc": "2.0",
     "method": "hostinterface.create",
     "params": {
-        "hostid": host_creator,
+        "hostid": host_id,
         "dns": "",
         "ip": ip,
         "main": 0,
@@ -123,23 +133,55 @@ host_interface_id = post({
         "type": 1,
         "useip": 1
     },
-    "auth": "038e1d7b1735c6a5436ee9eae095879e",
+    "auth": auth_token,
     "id": 1
 }).json()["result"]["interfaceids"][0]
-print "Host interface created"
-item_creator = post({
+zbx_item_creator = post({
     "jsonrpc": "2.0",
     "method": "item.create",
     "params": {
         "name": "Zbx check",
         "key_": "agent.hostname",
-        "hostid": host_creator,
+        "hostid": host_id,
         "type": 0,
         "value_type": 3,
-        "interfaceid": host_interface_id,
+        "interfaceid": host_zbx_interface_id,
         "delay": 30
     },
-    "auth": "038e1d7b1735c6a5436ee9eae095879e",
+    "auth": auth_token,
     "id": 1
 })
+"""
+host_jmx_interface_id = post({
+    "jsonrpc": "2.0",
+    "method": "hostinterface.create",
+    "params": {
+        "hostid": host_id,
+        "dns": "",
+        "ip": ip,
+        "main": 0,
+        "port": "8097",
+        "type": 4,
+        "useip": 1
+    },
+    "auth": auth_token,
+    "id": 1
+}).json()["result"]["interfaceids"][0]
+print "Host interface created"
+jmx_item_creator = post({
+    "jsonrpc": "2.0",
+    "method": "item.create",
+    "params": {
+        "name": "Java Heap Memory Item",
+        "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
+        "hostid": host_id,
+        "type": 16,
+        "value_type": 3,
+        "interfaceid": host_jmx_interface_id,
+        "delay": 30
+    },
+    "auth": auth_token,
+    "id": 1
+})
+"""
 print "End"
