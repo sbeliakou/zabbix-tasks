@@ -41,6 +41,15 @@ global \$DB;
 \$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
 " > /etc/zabbix/web/zabbix.conf.php
 
-yum install zabbix-get -y;
-systemctl start zabbix-server;
-systemctl start httpd;
+systemctl restart mariadb;
+systemctl restart zabbix-server;
+systemctl restart httpd;
+
+
+
+
+
+
+
+
+
