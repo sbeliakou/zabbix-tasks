@@ -7,3 +7,4 @@ yum -y install zabbix-agent
 sed -i -e 's:127.0.0.1:192.168.56.11:g' /etc/zabbix/zabbix_agentd.conf
 
 systemctl start zabbix-agent
+systemctl enable zabbix-agent
