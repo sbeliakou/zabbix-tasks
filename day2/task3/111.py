@@ -29,34 +29,34 @@ auth_token = post({
     "id": 0}
 ).json()["result"]
 
-try:
-    get_cloud = post({
-    "jsonrpc": "2.0",
-    "method": "hostgroup.get",
-    "params": {
-        "output": "extend",
-        "filter": {
-            "host": ["CloudHosts"]
-        }
-    },
-    "auth": auth_token,
-    "id": 1}
-    ).json()["result"][0]["name"]
-    print "some error"
-except IndexError:
-    if True:
-        host_group = post({
-            "jsonrpc": "2.0",
-            "method": "hostgroup.create",
-            "params": {
-                "name": Project_g
-            },
-            "auth": auth_token,
-            "id": 1}
-        ).json()["result"]["groupids"][0]
-        print host_group
 
-        template_id = post({
+try:
+    host_group = post({
+        "jsonrpc": "2.0",
+        "method": "hostgroup.create",
+        "params": {
+            "name": Project_g
+        },
+        "auth": auth_token,
+        "id": 1}
+    ).json()["result"]["groupids"][0]
+    print host_group
+except:
+    get_cloud = post({
+              "jsonrpc": "2.0",
+              "method": "hostgroup.get",
+              "params": {
+                  "output": "extend",
+                  "filter": {
+                      "host": ["CloudHosts"]
+                  }
+              },
+              "auth": auth_token,
+              "id": 1}
+          ).json()["result"][0]["name"]
+    print "some error"
+
+template_id = post({
             "jsonrpc": "2.0",
             "method": "template.create",
             "params": {
@@ -68,9 +68,9 @@ except IndexError:
             "auth": auth_token,
             "id": 1}
         ).json()["result"]["templateids"][0]
-        print template_id
+print template_id
 
-        host_id = post({
+host_id = post({
             "jsonrpc": "2.0",
             "method": "host.create",
             "params": {
@@ -104,5 +104,6 @@ except IndexError:
             "auth": auth_token,
             "id": 1}
         ).json()["result"]["hostids"][0]
-        print host_id
+print host_id
+
 
