@@ -50,7 +50,7 @@ systemctl enable httpd
 systemctl start httpd
 
 systemctl enable zabbix-server
-stemctl start zabbix-server
+systemctl start zabbix-server
 
 yum -y install zabbix-agent
 systemctl enable zabbix-agent
@@ -59,4 +59,3 @@ systemctl start zabbix-agent
 yum -y install zabbix-java-gateway
 systemctl enable zabbix-java-gateway
 systemctl start zabbix-java-gateway
-
