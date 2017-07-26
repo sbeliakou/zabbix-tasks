@@ -54,9 +54,10 @@ EOF
 
 yum install zabbix-get -y
 
+systemctl enable zabbiz-agent
 systemctl enable zabbix-server
 systemctl enable httpd
 systemctl start zabbix-server
 systemctl start httpd
-
+systemctl start zabbiz-agent
 
