@@ -35,3 +35,13 @@ Configure:
 <img src="pictures/Screenshot from 2017-07-26 17-26-50.png">
 <img src="pictures/Screenshot from 2017-07-26 17-27-07.png">
 
+# 4. LOG check with zabbix
+-Create item and develop custom trigger for log monitoring (you can use httpd or tomcat logs)
+
+<img src="pictures/Screenshot from 2017-07-26 17-36-06.png">
+
+-Create a trigger for errors in log file monitored by that item
+
+<img src="pictures/Screenshot from 2017-07-26 17-36-22.png">
+
+<img src="pictures/Screenshot from 2017-07-26 17-36-34.png">
