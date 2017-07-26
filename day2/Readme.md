@@ -15,10 +15,10 @@
  - JMX trigger is working properly
 <img src="Screenshot from 2017-07-25 16-49-19.png">
 
-
+ - JMX trigger config
 <img src="Screenshot from 2017-07-25 16-49-34.png">	
 
-
+- JMX trigger status
 <img src="Screenshot from 2017-07-25 17-12-33.png">	
 
 # Task 2 (Configure WEB check: Scenario to test Tomcat availability as well as Application heath, Configure Triggers to alert once WEB resources become unavailable)
