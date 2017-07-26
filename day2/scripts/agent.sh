@@ -33,5 +33,29 @@ else
     echo "AGENT IS STOPPED"
 fi
 
-#sed '/Environment=/a CLIENTSCRIPT2="hello"' file
-#sed -i 's/Connector address="192.168.56.201" port=/Connector port=/' /opt/apache/tomcat/7.0.62/conf/server.xml
+#loading python modules for script:
+yum  -y install python2-pip.noarch
+pip install requests
+
+
+wget https://raw.githubusercontent.com/artem-aksenkin/zabbix-tasks/blob/day2/day2/scripts/python_api.py -P /home/vagrant/
+chmod +x /home/vagrant/python_api.py
+
+touch /etc/systemd/system/zabbixreg.service
+chmod 664 /etc/systemd/system/zabbixreg.service
+
+cat >/etc/systemd/system/zabbixreg.service << 'EOL'
+[Unit]
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python /home/vagrant/python_api.py
+Type=forking
+PIDFile=path_to_pidfile
+
+[Install]
+WantedBy=default.target
+EOL
+
+systemctl daemon-reload
+systemctl start zabbixreg.service
