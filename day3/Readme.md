@@ -40,5 +40,31 @@ Vagrant.configure("2") do |config|
 end
 end
 ```
+#  Task. Zabbix. Items
 
 ![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/1.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/2.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/3.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/4.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/5.png "")
+
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/6.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/7.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/8.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/9.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/10.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/11.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/17.png "")
+
+
+#  Task. Zabbix. Operations
+
+## 1. Configure Custom graphs and screens of your infrastructure
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/12.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/13.png "")
+
+## 2. Maintenance
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/14.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/15.png "")
+![alt text](https://github.com/anton-maslakou/zabbix-tasks/blob/day3/day3/imag/16.png "")
+
