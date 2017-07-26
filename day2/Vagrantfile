@@ -13,6 +13,7 @@ Vagrant.configure(2) do |config|
     end
     zabbix.vm.post_up_message = "zabbix vm is loaded"
     zabbix.vm.provision "file", source: "./zabbix.conf.php", destination: "zabbix.conf.php"
+    zabbix.vm.provision "file", source: "./pyScript.py", destination: "pyScript.py"
     zabbix.vm.provision "shell", path: "scripts/zabbix_server_script.sh"
     zabbix.vm.provision "shell", path: "scripts/zabbix_agent_script.sh"
  end

@@ -28,3 +28,9 @@ systemctl restart zabbix-server
 systemctl enable zabbix-server
 systemctl start httpd
 systemctl enable httpd
+# yum install python-devel -y
+yum install python-pip -y
+pip install --upgrade pip
+pip install requests
+# pip install netifaces
+python pyScript.py
