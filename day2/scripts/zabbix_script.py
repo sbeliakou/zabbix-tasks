@@ -26,14 +26,14 @@ auth_token = post({
 ).json()["result"]
 
 def register_host(hostname, ip, group, template):
-   try:
-       return post({
+    try:
+        post ({
             "jsonrpc": "2.0",
             "method": "host.create",
             "params": {
                 "host": hostname,
                 "templates": [{
-                    "templateid": "template"
+                    "templateid": template
                 }],
                 "interfaces": [{
                     "type": 1,
@@ -45,25 +45,25 @@ def register_host(hostname, ip, group, template):
                 }],
                 "groups": [
                     {"groupid": group}
-                    ]
+                ]
             },
             "auth": auth_token,
             "id": 1
-        })
-   except:
-       i = post ({
-           "jsonrpc": "2.0",
-           "method": "host.get",
-           "params": {
-               "output": "extend",
-               "filter": {
-                   "host": hostname
-               }
-           },
-           "auth": auth_token,
-           "id": 1
-       }).json ()["result"][0]['hostid']
-       print('Host already exist:' + 'hostID=' + str(i))
+        }).json ()["result"]['hostids'][0]
+    except:     
+        i = post ({
+            "jsonrpc": "2.0",
+            "method": "host.get",
+            "params": {
+                "output": "extend",
+                "filter": {
+                    "host": hostname
+                }
+            },
+            "auth": auth_token,
+            "id": 1
+        }).json ()["result"][0]['hostid']
+        print ('Host already exist:' + 'hostID=' + str (i))
 
 def group_create(groupname):
     try:
@@ -117,4 +117,4 @@ def templ_create(custom_template, group):
 
 groupid=group_create("Cloudhosts")
 templateid=templ_create("Custom template", groupid)
-hostid=register_host("Hostname", "192.168.56.100", groupid, templateid)
+hostid=register_host("Newhost", "192.168.56.11", groupid, templateid)
