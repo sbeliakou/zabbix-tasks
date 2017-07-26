@@ -2,27 +2,32 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.define "zabbix_server" do |zabbix|
-    zabbix.vm.box = "Centos-7.3"
-    zabbix.vm.hostname = "zabbix"
-    zabbix.vm.network :private_network, ip: "10.1.1.1"
-    zabbix.vm.network "forwarded_port", guest: 80, host: 8080
-    zabbix.vm.provider 'virtualvm' do |v|
-        v.memory = "1000"
+  config.vm.define "zabbix_server" do |server|
+    server.vm.hostname = "server"
+    server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+    server.vm.network "forwarded_port", guest: 80, host: 8080
+    server.vm.network "private_network", ip: "192.168.56.10"
+    server.vm.provider "virtualbox" do |vb|
+      vb.name = "Zabbix Server"
+      vb.memory = "1024"
     end
-    zabbix.vm.provision "shell", path: "provision/prov-zabbix.sh"
-    zabbix.vm.provision "shell", path: "provision/prov-agent.sh"
+
+    server.vm.provision "shell", path: "scripts/server.sh"
+    server.vm.provision "shell", path: "scripts/agent.sh"
+
   end
 
-  config.vm.define("tomcat") do |tomcat|
-        tomcat.vm.box = "Centos-7.3"
-        tomcat.vm.hostname = "tomcat"
-        tomcat.vm.network :private_network, ip: "10.1.1.2"
-        tomcat.vm.provider 'virtualvm' do |v|
-            v.memory = "500"
-        end
-    tomcat.vm.provision "shell", path: "provision/prov-tomcat.sh"
-    tomcat.vm.provision "shell", path: "provision/prov-agent.sh"
+  config.vm.define "host1" do |host1|
+    host1.vm.hostname = "host-agent1"
+    host1.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+    host1.vm.network "private_network", ip: "192.168.56.11"
+    host1.vm.provider "virtualbox" do |vb|
+      vb.name = "Host1"
+      vb.memory = "1024"
+    end
+
+    host1.vm.provision "shell", path: "scripts/agent.sh"
+    host1.vm.provision "shell", path: "scripts/tomcat.sh"
   end
+
 end
-
