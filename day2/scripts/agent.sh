@@ -11,6 +11,22 @@ sed -i 's@ServerActive=127.0.0.1@ServerActive=192.168.56.10@' /etc/zabbix/zabbix
 sed -i 's@# ListenPort=10050@ListenPort=10050@' /etc/zabbix/zabbix_agentd.conf
 sed -i 's@Hostname=Zabbix server@Hostname=zabbix1@' /etc/zabbix/zabbix_agentd.conf
 
+echo "### Install python modules ###"
+wget https://bootstrap.pypa.io/get-pip.py -P /tmp
+python /tmp/get-pip.py
+pip install requests
+
+echo "### Download and run python scripts ###"
+wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski2/day2/scripts/script.py -P /tmp
+wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski2/day2/scripts/change_host_status.py -P /tmp
+python /tmp/script.py
+
+echo "### Making changes to zabbix agent systemd unit file ###"
+sed -i '/ExecStart=\/usr\/sbin\/zabbix_agentd -c $CONFFILE/a\
+ExecStartPost=/usr/bin/python /tmp/change_host_status.py 0 > /tmp/change_host_status.result 2>&1' /usr/lib/systemd/system/zabbix-agent.service  
+sed -i '/ExecStop=\/bin\/kill -SIGTERM $MAINPID/a\
+ExecStopPost=/usr/bin/python /tmp/change_host_status.py 1 > /tmp/change_host_status.result 2>&1' /usr/lib/systemd/system/zabbix-agent.service
+systemctl daemon-reload
 systemctl start zabbix-agent
 systemctl enable zabbix-agent
 
@@ -33,14 +49,6 @@ yum install zabbix-java-gateway -y > /dev/null
 systemctl start zabbix-java-gateway
 systemctl enable zabbix-java-gateway
 
-echo "### Install python modules ###"
-wget https://bootstrap.pypa.io/get-pip.py -P /tmp
-python /tmp/get-pip.py
-pip install requests
-
-echo "### Download and run python script ###"
-wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski2/day2/scripts/script.py -P /tmp
-python /tmp/script.py
 
 
 
