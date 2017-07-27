@@ -225,8 +225,8 @@ if ifAvailable(currenthost) == 0:
     disablehost(id_host)
 enablehost(id_host)
 
-if len(sys.argv) > 0:
-    todisable = sys.argv[0]
+if len(sys.argv) > 1:
+    todisable = sys.argv[1]
     disablehost(getId(todisable, 'host'))
 
 #hosttogroup(customid_host, id_group)
