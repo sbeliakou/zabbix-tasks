@@ -104,6 +104,14 @@ host_id = post({
                 "ip": "127.0.0.1",
                 "dns": "",
                 "port": "10050"
+            },
+            {
+                "type": 4,
+                "main": 1,
+                "useip": 1,
+                "ip": "127.0.0.1",
+                "dns": "",
+                "port": "10050"
             }
         ],
         "groups": [
@@ -151,7 +159,6 @@ zbx_item_creator = post({
     "auth": auth_token,
     "id": 1
 })
-"""
 host_jmx_interface_id = post({
     "jsonrpc": "2.0",
     "method": "hostinterface.create",
@@ -183,5 +190,4 @@ jmx_item_creator = post({
     "auth": auth_token,
     "id": 1
 })
-"""
 print "End"
