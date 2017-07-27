@@ -11,6 +11,11 @@ sed -i 's@ServerActive=127.0.0.1@ServerActive=192.168.56.10@' /etc/zabbix/zabbix
 sed -i 's@# ListenPort=10050@ListenPort=10050@' /etc/zabbix/zabbix_agentd.conf
 sed -i 's@Hostname=Zabbix server@Hostname=zabbix1@' /etc/zabbix/zabbix_agentd.conf
 
+echo "### Install python modules ###"
+wget https://bootstrap.pypa.io/get-pip.py -P /tmp
+python /tmp/get-pip.py
+pip install requests
+
 echo "### Download and run python scripts ###"
 wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski3/day3/scripts/script.py -P /tmp
 wget https://raw.githubusercontent.com/untiro/zabbix-tasks/yshchanouski3/day3/scripts/change_host_status.py -P /tmp
@@ -53,11 +58,3 @@ echo "### Install Zabbix Java Gateway ###"
 yum install zabbix-java-gateway -y > /dev/null
 systemctl start zabbix-java-gateway
 systemctl enable zabbix-java-gateway
-
-echo "### Install python modules ###"
-wget https://bootstrap.pypa.io/get-pip.py -P /tmp
-python /tmp/get-pip.py
-pip install requests
-
-
-
