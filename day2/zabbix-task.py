@@ -234,9 +234,10 @@ def createhost(name, type):
 
 if len(sys.argv) > 2:
     totype = sys.argv[2]
-    toname = sys.argv[3]
-    if toname is None:
+    if sys.argv[3] is None:
         toname = currenthost
+    else:
+        toname = sys.argv[3]
     todo = sys.argv[1]
     if todo == "create":
         if totype == "all":
