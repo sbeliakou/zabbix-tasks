@@ -234,7 +234,7 @@ def createhost(name, type):
 
 if len(sys.argv) > 1:
     totype = sys.argv[2]
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         toname = currenthost
     else:
         toname = sys.argv[3]
