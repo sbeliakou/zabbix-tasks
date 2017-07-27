@@ -2,7 +2,7 @@ import requests
 import json
 from requests.auth import HTTPBasicAuth
 
-zabbix_server = "192.168.100.101"
+zabbix_server_ip = "192.168.100.101"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
 
@@ -14,7 +14,7 @@ ip = "192.168.100.102"
 
 def post(request):
     headers = {'content-type': 'application/json'}
-    return requests.post("http://" + zabbix_server + "/api_jsonrpc.php",
+    return requests.post("http://" + zabbix_server_ip + "/api_jsonrpc.php",
                          data=json.dumps(request),
                          headers=headers,
                          auth=HTTPBasicAuth(zabbix_api_admin_name, zabbix_api_admin_password))
@@ -111,7 +111,7 @@ host_id = post({
                 "useip": 1,
                 "ip": "127.0.0.1",
                 "dns": "",
-                "port": "10050"
+                "port": "8097"
             }
         ],
         "groups": [
@@ -159,28 +159,130 @@ items_id = post({
     "jsonrpc": "2.0",
     "method": "item.create",
     "params": [
-        {
+        {   # item 0
             "name": "Zbx check",
             "key_": "agent.hostname",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 4,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 1
+            "name": "Zabbix enabled items count",
+            "key_": "zabbix[items]",
+            "hostid": host_id,
+            "type": 5,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 2
+            "name": "Zabbix enabled items count",
+            "key_": "zabbix[hosts]",
+            "hostid": host_id,
+            "type": 5,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 3
+            "name": "Zabbix 80 port check",
+            "key_": "net.tcp.service[" + zabbix_server_ip + "]",
             "hostid": host_id,
             "type": 0,
             "value_type": 3,
             "interfaceid": host_interfaces_id[0],
             "delay": 30
         },
-        {
+        {   # item 4
+            "name": "Zabbix DB (3306 port) check",
+            "key_": "net.tcp.service[" + zabbix_server_ip + "]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 5
+            "name": "Tomcat 80 port check",
+            "key_": "net.tcp.service[" + ip + "]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 6
+            "name": "Tomcat 8080 port check",
+            "key_": "net.tcp.service[" + ip + "]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 7
+            "name": "CPU num max",
+            "key_": "system.cpu.num[max]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 60
+        },
+        {   # item 8
+            "name": "CPU load",
+            "key_": "system.cpu.load[all,avg1]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 5
+        },
+        {   # item 9
+            "name": "Calculated CPU load per core avg 1 min",
+            "key_": "system.cpu.load[,avg1]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",60)/last(\"system.cpu.num[max]\")",
+            "delay": 60
+        },
+        {   # item 10
+            "name": "Calculated CPU load per core avg 5 min",
+            "key_": "system.cpu.load[,avg5]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",300)/last(\"system.cpu.num[max]\")",
+            "delay": 300
+        },
+        {   # item 11
+            "name": "CPU load per core avg 15 min",
+            "key_": "system.cpu.load[,avg15]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
+            "delay": 900
+        },
+        {   # item 12
             "name": "Java Heap Memory Item",
             "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
             "hostid": host_id,
             "type": 16,
-            "value_type": 3,
+            "value_type": 0,
             "interfaceid": host_interfaces_id[1],
             "delay": 30
         }
     ],
     "auth": auth_token,
     "id": 1
-}).json()["result"]["itemids"][0]
+}).json()["result"]["itemids"]
 print "Host interface created"
 graph_create = post({
     "jsonrpc": "2.0",
@@ -191,9 +293,9 @@ graph_create = post({
         "height": 200,
         "gitems": [
             {
-                "itemid": items_id[0],
+                "itemid": items_id[12],
                 "color": "00AA00"
-            }
+            },
         ]
     },
     "auth": auth_token,
