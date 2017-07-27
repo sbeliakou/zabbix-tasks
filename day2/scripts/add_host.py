@@ -1,10 +1,14 @@
 import sys, os, requests, json, sys
 from requests.auth import HTTPBasicAuth
+import socket
+import os
 
-zabbix_server = sys.argv[1]#"192.168.56.105"
+zabbix_server = "192.168.56.10"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
-new_host = sys.argv[2]#'zabbix-client'
+new_host = socket.gethostname()
+new_hostip = os.popen('ip addr show enp0s8 | grep "\<inet\>" | awk \'{ print $2 }\' | awk -F "/" \'{ print $1 }\'').read().strip()
+
 new_group = 'CloudHosts'
 new_template = 'Custom_template'
 
@@ -105,7 +109,7 @@ try:
                 "type": 1,
                 "main": 1,
                 "useip": 1,
-                "ip": "192.168.56.106",
+                "ip": new_hostip,
                 "dns": "",
                 "port": "10050"
             }
@@ -121,11 +125,7 @@ try:
             }
         ],
         "inventory_mode": 0,
-        "inventory": {
-            "macaddress_a": "01234",
-            "macaddress_b": "56768"
-        }
-    },
+     },
     "auth": auth_token,
     "id": 1
     }).json()['result']['hostids'][0]

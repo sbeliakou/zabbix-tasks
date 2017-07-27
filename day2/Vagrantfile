@@ -1,13 +1,13 @@
 
 Vagrant.configure("2") do |config|
   config.vm.define "srv-zabbix" do |server|
-   server.vm.define "srv-zabbix"
-   server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-   #server.vm.box = "centos73-min.box"
-   server.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
-   #server.vm.box_url = "centos73-min.box"
+   #server.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+   server.vm.box = "centos73-min.box"
+   #server.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
+   server.vm.box_url = "../centos73-min.box"
    server.vm.hostname = "srv-zabbix"
-   server.vm.network "private_network", ip: "192.168.56.105"
+   server.vm.network "forwarded_port", guest: 80, host: 8080
+   server.vm.network "private_network", ip: "192.168.56.10"
    server.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
    end
@@ -17,13 +17,12 @@ Vagrant.configure("2") do |config|
  end
 #client
   config.vm.define "zabbix-client" do |client|
-   client.vm.define "zabbix-client"
-   client.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
-   #client.vm.box = "centos73-min.box"
-   client.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
-   #client.vm.box_url = "centos73-min.box"
+   #client.vm.box = "sbeliakou/centos-7.3-x86_64-minimal"
+   client.vm.box = "centos73-min.box"
+   #client.vm.box_url = "https://atlas.hashicorp.com/sbeliakou/boxes/centos-7.3-x86_64-minimal"
+   client.vm.box_url = "../centos73-min.box"
    client.vm.hostname = "zabbix-client"
-   client.vm.network "private_network", ip: "192.168.56.106"
+   client.vm.network "private_network", ip: "192.168.56.11"
    client.vm.provider "virtualbox" do |vb|
      vb.memory = "1024"
    end

@@ -44,7 +44,6 @@ systemctl enable zabbix-server
 systemctl enable httpd
 systemctl enable zabbix-java-gateway
 systemctl enable mariadb
-
 systemctl enable zabbix-agent
 
 echo "+++++++++++++++++++++++++++++"
