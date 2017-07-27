@@ -43,6 +43,17 @@ def ifAvailable(name):
      return exist_check(name, 'host.get').json()['result'][0]['status']
 
 def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
+    """
+    Method for creating Hosts, HosGroups or Templates by given name on
+    choosen ip-addr (default: Zabbix server's) and autoassigning it
+    to an existing ones (default: not assign)
+    :param name: str for name
+    :param method: hostgroup.create|template.create|host.create as str value
+    :param host: link host (only one for now) to your object
+    :param group: link group (only one for now) to your object
+    :param unitip: choose ip-addr  to link
+    :return:
+    """
     if method == "hostgroup.create" or "template.create" or "host.create":
         request = {
             "jsonrpc": "2.0",
@@ -232,6 +243,9 @@ def createhost(name, type):
     else:
         print("Name|Type error")
 
+isneedtocreate('agent3', 'host')
+createhost('agent3', 'host')
+
 if len(sys.argv) > 1:
     totype = sys.argv[2]
     if len(sys.argv) < 2:
@@ -267,6 +281,7 @@ else:
     print("""Usage: create|delete|disable|enable <type> <name>
             type: host|group|template
             name: any string value, defaul: current hostname""")
+
 
 #hosttogroup(customid_host, id_group)
 #deletesomething("host.delete", id_host)
