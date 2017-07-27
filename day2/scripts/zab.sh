@@ -5,7 +5,7 @@ echo "111.111.11.12 tomcat" >> /etc/hosts
 ###ZABBIX###
 yum install mariadb mariadb-server -y
 /usr/bin/mysql_install_db --user=mysql
-systemctl start mariadb
+systemctl start mariadb && systemctl enable mariadb
 mysql -uroot -Bse "create database zabbix character set utf8 collate utf8_bin; grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
 yum install http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm -y
 yum install zabbix-server-mysql zabbix-web-mysql -y
@@ -16,15 +16,15 @@ sed -i 's/# DBPassword=/DBPassword=zabbix/' /etc/zabbix/zabbix_server.conf;
 yum install http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm -y
 yum install zabbix-web-mysql -y
 sed -i 's@# php_value date.timezone Europe/Riga@php_value date.timezone Europe/Minsk@'  /etc/httpd/conf.d/zabbix.conf
-systemctl start httpd
+systemctl start httpd && systemctl enable httpd
+systemctl enable zabbix-server
 
 ###J-GATE###
 yum install zabbix-java-gateway -y
 sed -i 's/# JavaGateway=/JavaGateway=111.111.11.11/' /etc/zabbix/zabbix_server.conf;
 sed -i 's/# JavaGatewayPort=10052/JavaGatewayPort=10052/' /etc/zabbix/zabbix_server.conf;
 sed -i 's/# StartJavaPollers=0/StartJavaPollers=5/' /etc/zabbix/zabbix_server.conf;	
-systemctl start zabbix-java-gateway
-systemctl enable zabbix-java-gateway
+systemctl start zabbix-java-gateway && systemctl enable zabbix-java-gateway
 systemctl restart zabbix-server
 	
 ###Z-AGENT###
@@ -36,7 +36,7 @@ sed -i 's/Server=127.0.0.1/Server=111.111.11.11/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/# ListenPort=10050/ListenPort=10050/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/# ListenIP=0.0.0.0/ListenIP=0.0.0.0/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/# StartAgents=3/StartAgents=3/' /etc/zabbix/zabbix_agentd.conf
-systemctl start zabbix-agent
+systemctl start zabbix-agent && systemctl enable zabbix-agent
 	
 ###virtual-host###
 cp /home/vagrant/vb-share/virtualh.conf /etc/httpd/conf.d/
