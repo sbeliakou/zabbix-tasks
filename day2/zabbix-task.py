@@ -232,9 +232,9 @@ def createhost(name, type):
     else:
         print("Name|Type error")
 
-if len(sys.argv) > 2:
+if len(sys.argv) > 1:
     totype = sys.argv[2]
-    if sys.argv[3] is None:
+    if len(sys.argv) < 3:
         toname = currenthost
     else:
         toname = sys.argv[3]
