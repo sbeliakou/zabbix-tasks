@@ -18,9 +18,9 @@ python /tmp/script.py
 
 echo "### Making changes to zabbix agent systemd unit file ###"
 sed -i '/ExecStart=\/usr\/sbin\/zabbix_agentd -c $CONFFILE/a\
-ExecStartPost=/usr/bin/python /tmp/change_host_status.py 0' /usr/lib/systemd/system/zabbix-agent.service  
+ExecStartPost=/usr/bin/python /tmp/change_host_status.py 0 > /tmp/change_host_status.result 2>&1' /usr/lib/systemd/system/zabbix-agent.service  
 sed -i '/ExecStop=\/bin\/kill -SIGTERM $MAINPID/a\
-ExecStopPost=/usr/bin/python /tmp/change_host_status.py 1' /usr/lib/systemd/system/zabbix-agent.service
+ExecStopPost=/usr/bin/python /tmp/change_host_status.py 1 > /tmp/change_host_status.result 2>&1' /usr/lib/systemd/system/zabbix-agent.service
 systemctl daemon-reload
 systemctl start zabbix-agent
 systemctl enable zabbix-agent

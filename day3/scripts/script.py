@@ -1,4 +1,13 @@
 #!/usr/bin/python
+
+#############
+#
+# Script to create zabbix custom template, group and host at zabbix server
+#
+# or get their ids.
+#
+#############
+
 import requests, json
 from requests.auth import HTTPBasicAuth
 from socket import gethostname

@@ -1,5 +1,16 @@
 #!/usr/bin/python
-import script, sys
+
+#############
+#
+# Script to enable/disable zabbix host at zabbix server.
+#
+# Run with parameters: 0 - enable, 1 - disable
+#
+# All main parameters can be changed at script.py
+#
+#############
+
+import sys, script
 
 
 def change_status(host_id, status):
@@ -24,8 +35,12 @@ if answer is not None:
             change_status(zabbix_api_hostname_id, '1')
             if script.check_existence(script.zabbix_api_hostname, "host.get")["status"] == '1':
                 print('Host {} was successfully disabled!'.format(script.zabbix_api_hostname))
+                with open('/tmp/change_host_status.log', 'w') as fl:
+                    fl.write('Host {} was successfully disabled!'.format(script.zabbix_api_hostname) + '\n')
         else:
             change_status(zabbix_api_hostname_id, '0')
             if script.check_existence(script.zabbix_api_hostname, "host.get")["status"] == '0':
                 print('Host {} was successfully enabled!'.format(script.zabbix_api_hostname))
+                with open('/tmp/change_host_status.log', 'w') as fl:
+                    fl.write('Host {} was successfully enabled!'.format(script.zabbix_api_hostname) + '\n')
 
