@@ -178,7 +178,7 @@ items_id = post({
             "delay": 30
         },
         {   # item 2
-            "name": "Zabbix enabled items count",
+            "name": "Zabbix enabled hosts count",
             "key_": "zabbix[hosts]",
             "hostid": host_id,
             "type": 5,
