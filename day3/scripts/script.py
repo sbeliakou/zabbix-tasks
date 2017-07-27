@@ -1,12 +1,13 @@
 #!/usr/bin/python
-import requests, json, socket
+import requests, json
 from requests.auth import HTTPBasicAuth
+from socket import gethostname
 
 zabbix_server = "192.168.56.10"
 zabbix_api_admin_name = "Admin"
 zabbix_api_admin_password = "zabbix"
 zabbix_api_group_name = "CloudHosts"
-zabbix_api_hostname = "socket.gethostname()"
+zabbix_api_hostname = gethostname()
 zabbix_api_hostname_ip = "192.168.56.11"
 zabbix_api_template_name = "Custom CloudHosts Template"
 
