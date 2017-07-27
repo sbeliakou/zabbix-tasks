@@ -14,6 +14,9 @@ templ_create = False
 group_create = False
 host_create = False
 DT = str(datetime.now().date()) + " " + str(datetime.now().strftime('%H:%M:%S')) + " : "
+id_host = 1
+id_group = 1
+id_template = 1
 
 
 def post(request):
@@ -174,60 +177,95 @@ def getId(name, type):
 
 
 ###Getting object id's###
-
-if exist_check('CustomTemplate', 'template.get').json()['result'] != []:
-    id_template = getId("CustomTemplate", "template")
-else:
-    templ_create = True
-if exist_check('CloudHosts', 'hostgroup.get').json()['result'] != []:
-    id_group = getId('CloudHosts', 'group')
-else:
-    group_create = True
-if exist_check(currenthost, 'host.get').json()['result'] != []:
-    id_host = getId(currenthost, 'host')
-else:
-    host_create = True
+def isneedtocreate (name, type):
+    if type == "template":
+        if exist_check(name, '%s.get' % type).json()['result'] != []:
+            id_template = getId(name, type)
+        else:
+            templ_create = True
+    elif type == "group":
+        if exist_check(name, 'host%s.get' % type).json()['result'] != []:
+            id_group = getId(name, type)
+        else:
+            group_create = True
+    elif type == "host":
+        if exist_check(name, '%s.get' % type).json()['result'] != []:
+            id_host = getId(name, type)
+        else:
+            host_create = True
+    else:
+        print("Name|Type error")
 
 
 ###Creation Host+Group+Template###
 
-if group_create:
-    create_something("CloudHosts", "hostgroup.create")
-    id_group = getId('CloudHosts', 'group')
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "CloudHosts host group successfully created. \n")
+def createhost(name, type):
+    if type == "group":
+        if group_create:
+            create_something(name, "host%s.create" % type)
+            id_group = getId('CloudHosts', 'group')
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "CloudHosts host group successfully created. \n")
+        else:
+            id_group = getId('CloudHosts', 'group')
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "CloudHosts host group already exists. Nothing to do \n")
+    elif type == "host":
+        if host_create:
+            create_something(name, '%s.create' % type, unitip='111.111.11.12')
+            id_host = getId(name, 'host')
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "%s host successfully created. \n" % name)
+        else:
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "%s host already exists. Nothing to do \n" % name)
+    elif type == "template":
+        if templ_create:
+            create_something(name, '%s.create' % type)
+            id_template = getId("CustomTemplate", "template")
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "CustomTemplate template successfully created. \n")
+        else:
+            id_template = getId("CustomTemplate", "template")
+            with open("host-create.log", mode='a') as logfile:
+                logfile.write(DT + "CustomTemplate template already exists. Nothing to do \n")
+    else:
+        print("Name|Type error")
+
+if len(sys.argv) > 2:
+    totype = sys.argv[2]
+    toname = sys.argv[3]
+    if toname is None:
+        toname = currenthost
+    todo = sys.argv[1]
+    if todo == "create":
+        if totype == "all":
+            isneedtocreate(toname, 'host')
+            isneedtocreate('CloudGroup', 'group')
+            isneedtocreate('CustomTemplate', 'template')
+            createhost(toname, 'host')
+            createhost('CloudGroup', 'group')
+            createhost('CustomTemplate', 'template')
+        else:
+            isneedtocreate(toname, type)
+            createhost(toname, type)
+    elif todo == "delete":
+        if totype == "group":
+            deletesomething('host%s.delete' % totype, toname)
+        else:
+            deletesomething('%s.delete' % totype, toname)
+    elif todo == "disable":
+        disablehost(getId(toname, totype))
+    elif todo == "enable":
+        enablehost(getId(toname, totype))
+    else:
+        print("""Usage: create|delete|disable|enable <type> <name>
+        type: host|group|template
+        name: any string value""")
 else:
-    id_group = getId('CloudHosts', 'group')
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "CloudHosts host group already exists. Nothing to do \n")
-
-if host_create:
-    create_something(currenthost, 'host.create', group=id_group, unitip='111.111.11.12')
-    id_host = getId(currenthost, 'host')
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "%s host successfully created. \n" % currenthost)
-else:
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "%s host already exists. Nothing to do \n" % currenthost)
-
-
-if templ_create:
-    create_something('CustomTemplate', 'template.create', id_host, id_group)
-    id_template = getId("CustomTemplate", "template")
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "CustomTemplate template successfully created. \n")
-else:
-    id_template = getId("CustomTemplate", "template")
-    with open("host-create.log", mode='a') as logfile:
-        logfile.write(DT + "CustomTemplate template already exists. Nothing to do \n")
-
-if ifAvailable(currenthost) == 0:
-    disablehost(id_host)
-enablehost(id_host)
-
-if len(sys.argv) > 1:
-    todisable = sys.argv[1]
-    disablehost(getId(todisable, 'host'))
+    print("""Usage: create|delete|disable|enable <type> <name>
+            type: host|group|template
+            name: any string value, defaul: current hostname""")
 
 #hosttogroup(customid_host, id_group)
 #deletesomething("host.delete", id_host)
