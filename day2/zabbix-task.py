@@ -175,7 +175,7 @@ def getId(name, type):
     Short version for quick id-access
     :param name: any
     :param type: may be of "template | group | host"
-    :return:
+    :return: int of object Id
     """
     if type is "template":
         return exist_check(name, "%s.get" % type).json()['result'][0]['%sid' % type]
@@ -211,35 +211,42 @@ def isneedtocreate (name, type):
 ###Creation Host+Group+Template###
 
 def createhost(name, type):
+    """
+    Void func for creating an object of <type> with <name>
+    :param name:
+    :param type:
+    :return:
+    """
     if type == "group":
         if group_create:
             create_something(name, "host%s.create" % type)
-            id_group = getId('CloudHosts', 'group')
+            id_group = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
-                logfile.write(DT + "CloudHosts host group successfully created. \n")
+                logfile.write(DT + "%s host group successfully created. \n" % name)
         else:
-            id_group = getId('CloudHosts', 'group')
+            id_group = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "CloudHosts host group already exists. Nothing to do \n")
     elif type == "host":
         if host_create:
             create_something(name, '%s.create' % type, unitip='111.111.11.12')
-            id_host = getId(name, 'host')
+            id_host = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host successfully created. \n" % name)
         else:
+            id_host = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host already exists. Nothing to do \n" % name)
     elif type == "template":
         if templ_create:
             create_something(name, '%s.create' % type)
-            id_template = getId("CustomTemplate", "template")
+            id_template = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
-                logfile.write(DT + "CustomTemplate template successfully created. \n")
+                logfile.write(DT + "%s template successfully created. \n" % name)
         else:
-            id_template = getId("CustomTemplate", "template")
+            id_template = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
-                logfile.write(DT + "CustomTemplate template already exists. Nothing to do \n")
+                logfile.write(DT + "%s template already exists. Nothing to do \n" % name)
     else:
         print("Name|Type error")
 
