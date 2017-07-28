@@ -155,7 +155,9 @@ host_interfaces_id = post({
     "auth": auth_token,
     "id": 1
 }).json()["result"]["interfaceids"]
-print host_interfaces_id
+print host_interfaces_id[0]
+print host_interfaces_id[1]
+print host_id
 items_id = post({
     "jsonrpc": "2.0",
     "method": "item.create",
