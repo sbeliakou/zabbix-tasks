@@ -155,8 +155,6 @@ host_interfaces_id = post({
     "auth": auth_token,
     "id": 1
 }).json()["result"]["interfaceids"]
-print host_interfaces_id[0]
-print host_interfaces_id[1]
 items_id = post({
     "jsonrpc": "2.0",
     "method": "item.create",
@@ -166,21 +164,10 @@ items_id = post({
             "key_": "agent.hostname",
             "hostid": host_id,
             "type": 0,
-            "value_type": 3,
+            "value_type": 4,
             "interfaceid": host_interfaces_id[0],
             "delay": 30
         },
-        {   # item 1
-            "name": "Java Heap Memory Item",
-            "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
-            "hostid": host_id,
-            "type": 16,
-            "value_type": 0,
-            "interfaceid": host_interfaces_id[1],
-            "delay": 30
-        }
-    ],
-    """,
         {   # item 1
             "name": "Zabbix enabled items count",
             "key_": "zabbix[items]",
@@ -282,12 +269,20 @@ items_id = post({
             "interfaceid": host_interfaces_id[0],
             "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
             "delay": 900
+        },
+        {   # item 12
+            "name": "Java Heap Memory Item",
+            "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
+            "hostid": host_id,
+            "type": 16,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[1],
+            "delay": 30
         }
-    ],"""
+    ],
     "auth": auth_token,
     "id": 1
-}).json()
-print items_id
+}).json()["result"]["itemids"]
 print "Host interface created"
 graph_create = post({
     "jsonrpc": "2.0",
