@@ -42,7 +42,7 @@ auth_token = post({
 def ifAvailable(name):
      return exist_check(name, 'host.get').json()['result'][0]['status']
 
-def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
+def create_something (name, method, host=None, group=None, template=None, unitip=zabbix_ip):
     """
     Method for creating Hosts, HosGroups or Templates by given name on
     choosen ip-addr (default: Zabbix server's) and autoassigning it
@@ -55,7 +55,7 @@ def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
     :return:
     """
     if method == "hostgroup.create" or "template.create" or "host.create":
-        if method == "host.create" and group == None:
+        if method == "host.create" and (group == None or template==None):
             print("Error: host without group assigned creation attempt")
             return 42
         if method == "template.create" and group == None:
@@ -111,6 +111,14 @@ def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
                 }
             }
             request['params'].update(groupinclude)
+        if template != None:
+            templinclude = {
+                "templates":
+                    {
+                        "templateid": template
+                    }
+            }
+            request['params'].update(templinclude)
         post(request)
     else:
         return 42
@@ -286,7 +294,7 @@ def createhost(name, type, assignhost=None, assigntogroup=None):
         return readyid
     elif type == "host":
         if isneedtocreate(name, type)[1]:
-            create_something(name, '%s.create' % type, group=assigntogroup, unitip='111.111.11.12')
+            create_something(name, '%s.create' % type, group=assigntogroup)
             readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host successfully created. \n" % name)
@@ -345,8 +353,15 @@ def mainstart (args):
                 name: any string value, defaul: current hostname""")
 
 #mainstart(sys.argv)
-test = ['zabbix-task.py', 'create', 'all']
-mainstart(test)
+#test = ['zabbix-task.py', 'create', 'all']
+#mainstart(test)
+assignsId = {'ToHost': None, 'ToGroup': None, 'ToTemplate' : None}
+assignsId['ToGroup'] = getId('CloudGroup', 'group')
+assignsId['ToTemplate'] = getId('CustomTemplate', 'template')
+print(assignsId)
+print(exist_check(currenthost, 'host.get').json())
+create_something(currenthost, '%s.create' % type, group=assignsId['ToGroup'], template=assignsId['ToTemplate'])
+print(getId(currenthost, 'host'))
 
 """
 createhost('CloudGroup', 'group')
