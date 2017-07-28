@@ -194,6 +194,15 @@ items_id = post({
             "value_type": 3,
             "interfaceid": host_interfaces_id[0],
             "delay": 30
+        },
+        {   # item 4
+            "name": "Java Heap Memory Item",
+            "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
+            "hostid": host_id,
+            "type": 16,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[1],
+            "delay": 30
         }
     ],
     "auth": auth_token,
@@ -210,7 +219,7 @@ graph_create = post({
         "height": 200,
         "gitems": [
             {
-                "itemid": items_id[12],
+                "itemid": items_id["result"]["itemids"][4],
                 "color": "00AA00"
             },
         ]
