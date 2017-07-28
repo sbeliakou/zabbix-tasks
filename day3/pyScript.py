@@ -196,7 +196,7 @@ items_id = post({
             "delay": 30
         },
         {   # item 4
-            "name": "Zabbix DB (3306 port) check",
+            "name": "Zabbix DB 3306 port check",
             "key_": "net.tcp.service[" + zabbix_server_ip + "]",
             "hostid": host_id,
             "type": 0,
