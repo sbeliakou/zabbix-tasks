@@ -267,7 +267,7 @@ items_id = post({
             "value_type": 0,
             "interfaceid": host_interfaces_id[0],
             "formula": "avg(\"system.cpu.load[all,avg1]\",300)/last(\"system.cpu.num[max]\")",
-            "delay": 300
+            "delay": 60
         },
         {   # item 12
             "name": "CPU load per core avg 15 min",
@@ -277,7 +277,7 @@ items_id = post({
             "value_type": 0,
             "interfaceid": host_interfaces_id[0],
             "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
-            "delay": 900
+            "delay": 60
         }
     ],
     "auth": auth_token,
