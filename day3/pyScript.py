@@ -195,15 +195,6 @@ items_id = post({
             "interfaceid": host_interfaces_id[0],
             "delay": 30
         },
-        {   # item 4
-            "name": "Zabbix DB 3306 port check",
-            "key_": "net.tcp.service[" + zabbix_server_ip + "]",
-            "hostid": host_id,
-            "type": 0,
-            "value_type": 3,
-            "interfaceid": host_interfaces_id[0],
-            "delay": 30
-        },
         {   # item 5
             "name": "Tomcat 80 port check",
             "key_": "net.tcp.service[" + ip + "]",
