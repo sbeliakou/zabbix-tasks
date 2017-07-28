@@ -157,7 +157,6 @@ host_interfaces_id = post({
 }).json()["result"]["interfaceids"]
 print host_interfaces_id[0]
 print host_interfaces_id[1]
-print host_id
 items_id = post({
     "jsonrpc": "2.0",
     "method": "item.create",
@@ -167,11 +166,11 @@ items_id = post({
             "key_": "agent.hostname",
             "hostid": host_id,
             "type": 0,
-            "value_type": 4,
+            "value_type": 3,
             "interfaceid": host_interfaces_id[1],
             "delay": 30
         },
-        {   # item 2
+        {   # item 1
             "name": "Java Heap Memory Item",
             "key_": "jmx[\"java.lang:type=Memory\",HeapMemoryUsage.committed]",
             "hostid": host_id,
