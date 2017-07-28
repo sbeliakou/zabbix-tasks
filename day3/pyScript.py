@@ -188,7 +188,7 @@ items_id = post({
         },
         {   # item 3
             "name": "Zabbix 80 port check",
-            "key_": "net.tcp.service[" + zabbix_server_ip + "]",
+            "key_": "net.tcp.service[http," + zabbix_server_ip + ",80]",
             "hostid": host_id,
             "type": 0,
             "value_type": 3,
@@ -203,6 +203,81 @@ items_id = post({
             "value_type": 0,
             "interfaceid": host_interfaces_id[1],
             "delay": 30
+        },
+        {   # item 5
+            "name": "Zabbix DB 3306 port check",
+            "key_": "net.tcp.service[http," + zabbix_server_ip + ",3306]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 6
+            "name": "Tomcat 80 port check",
+            "key_": "net.tcp.service[http," + ip + ",80]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 7
+            "name": "Tomcat 8080 port check",
+            "key_": "net.tcp.service[http," + ip + ",8080]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 30
+        },
+        {   # item 8
+            "name": "CPU num max",
+            "key_": "system.cpu.num[max]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 3,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 60
+        },
+        {   # item 9
+            "name": "CPU load",
+            "key_": "system.cpu.load[all,avg1]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "delay": 5
+        },
+        {   # item 10
+            "name": "Calculated CPU load per core avg 1 min",
+            "key_": "system.cpu.load[,avg1]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",60)/last(\"system.cpu.num[max]\")",
+            "delay": 60
+        },
+        {   # item 11
+            "name": "Calculated CPU load per core avg 5 min",
+            "key_": "system.cpu.load[,avg5]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",300)/last(\"system.cpu.num[max]\")",
+            "delay": 300
+        },
+        {   # item 12
+            "name": "CPU load per core avg 15 min",
+            "key_": "system.cpu.load[,avg15]",
+            "hostid": host_id,
+            "type": 0,
+            "value_type": 0,
+            "interfaceid": host_interfaces_id[0],
+            "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
+            "delay": 900
         }
     ],
     "auth": auth_token,
