@@ -213,9 +213,9 @@ def isneedtocreate (name, type):
 def createhost(name, type):
     """
     Void func for creating an object of <type> with <name>
-    :param name:
-    :param type:
-    :return:
+    :param name: str of name
+    :param type: str of group|host|template
+    :return: writes into host-create.log in current folder with timestamp
     """
     if type == "group":
         if group_create:
@@ -250,45 +250,44 @@ def createhost(name, type):
     else:
         print("Name|Type error")
 
-isneedtocreate('agent3', 'host')
-createhost('agent3', 'host')
-
-if len(sys.argv) > 2:
-    totype = sys.argv[2]
-    if len(sys.argv) < 4:
-        toname = currenthost
-    else:
-        toname = sys.argv[3]
-    todo = sys.argv[1]
-    if todo == "create":
-        if totype == "all":
-            isneedtocreate(toname, 'host')
-            isneedtocreate('CloudGroup', 'group')
-            isneedtocreate('CustomTemplate', 'template')
-            createhost(toname, 'host')
-            createhost('CloudGroup', 'group')
-            createhost('CustomTemplate', 'template')
+def mainstart (args):
+    if len(args) > 2:
+        totype = args[2]
+        if len(args) < 4:
+            toname = currenthost
         else:
-            isneedtocreate(toname, type)
-            createhost(toname, type)
-    elif todo == "delete":
-        if totype == "group":
-            deletesomething('host%s.delete' % totype, toname)
+            toname = args[3]
+        todo = args[1]
+        if todo == "create":
+            if totype == "all":
+                isneedtocreate(toname, 'host')
+                isneedtocreate('CloudGroup', 'group')
+                isneedtocreate('CustomTemplate', 'template')
+                createhost(toname, 'host')
+                createhost('CloudGroup', 'group')
+                createhost('CustomTemplate', 'template')
+            else:
+                isneedtocreate(toname, type)
+                createhost(toname, type)
+        elif todo == "delete":
+            if totype == "group":
+                deletesomething('host%s.delete' % totype, toname)
+            else:
+                deletesomething('%s.delete' % totype, toname)
+        elif todo == "disable":
+            disablehost(getId(toname, totype))
+        elif todo == "enable":
+            enablehost(getId(toname, totype))
         else:
-            deletesomething('%s.delete' % totype, toname)
-    elif todo == "disable":
-        disablehost(getId(toname, totype))
-    elif todo == "enable":
-        enablehost(getId(toname, totype))
+            print("""Usage: create|delete|disable|enable <type> <name>
+            type: host|group|template
+            name: any string value""")
     else:
         print("""Usage: create|delete|disable|enable <type> <name>
-        type: host|group|template
-        name: any string value""")
-else:
-    print("""Usage: create|delete|disable|enable <type> <name>
-            type: host|group|template
-            name: any string value, defaul: current hostname""")
+                type: host|group|template
+                name: any string value, defaul: current hostname""")
 
+mainstart(sys.argv)
 
 #hosttogroup(customid_host, id_group)
 #deletesomething("host.delete", id_host)
