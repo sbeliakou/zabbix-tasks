@@ -167,7 +167,7 @@ items_id = post({
             "hostid": host_id,
             "type": 0,
             "value_type": 3,
-            "interfaceid": host_interfaces_id[1],
+            "interfaceid": host_interfaces_id[0],
             "delay": 30
         },
         {   # item 1
@@ -176,7 +176,7 @@ items_id = post({
             "hostid": host_id,
             "type": 16,
             "value_type": 0,
-            "interfaceid": host_interfaces_id[0],
+            "interfaceid": host_interfaces_id[1],
             "delay": 30
         }
     ],
