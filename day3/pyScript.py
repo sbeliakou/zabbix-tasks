@@ -167,7 +167,9 @@ items_id = post({
             "value_type": 4,
             "interfaceid": host_interfaces_id[0],
             "delay": 30
-        },
+        }
+    ],
+    """,
         {   # item 1
             "name": "Zabbix enabled items count",
             "key_": "zabbix[items]",
@@ -185,9 +187,7 @@ items_id = post({
             "value_type": 3,
             "interfaceid": host_interfaces_id[0],
             "delay": 30
-        }
-    ],
-        """,
+        },
         {   # item 3
             "name": "Zabbix 80 port check",
             "key_": "net.tcp.service[" + zabbix_server_ip + "]",
