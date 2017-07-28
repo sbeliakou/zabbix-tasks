@@ -247,7 +247,7 @@ items_id = post({
             "type": 0,
             "value_type": 0,
             "interfaceid": host_interfaces_id[0],
-            "formula": "avg(\"system.cpu.load[all,avg1]\",60)/last(\"system.cpu.num[max]\")",
+            # "formula": "avg(\"system.cpu.load[all,avg1]\",60)/last(\"system.cpu.num[max]\")",
             "delay": 60
         },
         {   # item 10
@@ -257,7 +257,7 @@ items_id = post({
             "type": 0,
             "value_type": 0,
             "interfaceid": host_interfaces_id[0],
-            "formula": "avg(\"system.cpu.load[all,avg1]\",300)/last(\"system.cpu.num[max]\")",
+            # "formula": "avg(\"system.cpu.load[all,avg1]\",300)/last(\"system.cpu.num[max]\")",
             "delay": 300
         },
         {   # item 11
@@ -267,7 +267,7 @@ items_id = post({
             "type": 0,
             "value_type": 0,
             "interfaceid": host_interfaces_id[0],
-            "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
+            # "formula": "avg(\"system.cpu.load[all,avg1]\",900)/last(\"system.cpu.num[max]\")",
             "delay": 900
         },
         {   # item 12
