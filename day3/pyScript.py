@@ -282,7 +282,8 @@ items_id = post({
     ],
     "auth": auth_token,
     "id": 1
-}).json()["result"]["itemids"]
+}).json()
+print items_id
 print "Host interface created"
 graph_create = post({
     "jsonrpc": "2.0",
