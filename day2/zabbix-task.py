@@ -51,7 +51,7 @@ def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
     :param method: hostgroup.create|template.create|host.create as str value
     :param host: link host (only one for now) to your object
     :param group: link group (only one for now) to your object
-    :param unitip: choose ip-addr  to link
+    :param unitip: choose ip-addr  to link (default: Zabbix server ip)
     :return:
     """
     if method == "hostgroup.create" or "template.create" or "host.create":
@@ -178,11 +178,11 @@ def getId(name, type):
     :return:
     """
     if type is "template":
-        return exist_check(name, type + ".get").json()['result'][0][type + 'id']
+        return exist_check(name, "%s.get" % type).json()['result'][0]['%sid' % type]
     elif type is "group":
         return exist_check(name, "host" + type + ".get").json()['result'][0][type + 'id']
     elif type is "host":
-        return exist_check(name, type + ".get").json()['result'][0][type + 'id']
+        return exist_check(name, "%s.get" % type).json()['result'][0]['%sid' % type]
     else:
         return 42
 
@@ -246,9 +246,9 @@ def createhost(name, type):
 isneedtocreate('agent3', 'host')
 createhost('agent3', 'host')
 
-if len(sys.argv) > 1:
+if len(sys.argv) > 2:
     totype = sys.argv[2]
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 4:
         toname = currenthost
     else:
         toname = sys.argv[3]
