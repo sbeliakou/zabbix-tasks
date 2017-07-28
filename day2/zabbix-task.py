@@ -55,6 +55,12 @@ def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
     :return:
     """
     if method == "hostgroup.create" or "template.create" or "host.create":
+        if method == "host.create" and group == None:
+            print("Error: host without group assigned creation attempt")
+            return 42
+        if method == "template.create" and group == None:
+            print("Error: template without group assigned creation attempt")
+            return 42
         request = {
             "jsonrpc": "2.0",
             "method": method,
@@ -68,6 +74,24 @@ def create_something (name, method, host=None, group=None, unitip=zabbix_ip):
                     "port": "10050"
                 }],
                 "host": name
+            },
+            "auth": auth_token,
+            "id": 1
+        }
+        if method == "hostgroup.create":
+            request = {
+            "jsonrpc": "2.0",
+            "method": method,
+            "params": {
+                "interfaces": [{
+                    "type": 1,
+                    "main": 1,
+                    "useip": 1,
+                    "ip": unitip,
+                    "dns": "",
+                    "port": "10050"
+                }],
+                "name": name
             },
             "auth": auth_token,
             "id": 1
@@ -148,11 +172,13 @@ def deletesomething(method, id):
                 "id": 1
             }
         )
+        #if exist_check(gethostname(), method[:-6]+'get').json()['result'] == []:
+            #print("Delete Successfull: object %s with <id %d> no longer exists" % (method[:-6], id))
     else:
         return "Post method incompatibility"
 
 def exist_check(name, type):
-    if type == "hostgroup.get" or "template.get" or "host.get":
+    if type == "template.get" or "host.get":
         return post(
             {
                 "jsonrpc": "2.0",
@@ -161,6 +187,21 @@ def exist_check(name, type):
                     "output": "extend",
                     "filter": {
                         "host": name
+                    }
+                },
+                "auth": auth_token,
+                "id": 1
+            }
+        )
+    elif type == "hostgroup.get":
+        return post(
+            {
+                "jsonrpc": "2.0",
+                "method": type,
+                "params": {
+                    "output": "extend",
+                    "filter": {
+                        "name": name
                     }
                 },
                 "auth": auth_token,
@@ -178,39 +219,54 @@ def getId(name, type):
     :return: int of object Id
     """
     if type is "template":
-        return exist_check(name, "%s.get" % type).json()['result'][0]['%sid' % type]
+        result = exist_check(name, "%s.get" % type).json()['result']
+        for each in result:
+            if each['name'] == name:
+                return each['%sid' % type]
     elif type is "group":
-        return exist_check(name, "host" + type + ".get").json()['result'][0][type + 'id']
+        result = exist_check(name, "host%s.get" % type).json()['result']
+        for each in result:
+            if each['name'] == name:
+                return each['%sid' % type]
     elif type is "host":
-        return exist_check(name, "%s.get" % type).json()['result'][0]['%sid' % type]
+        result = exist_check(name, "%s.get" % type).json()['result']
+        for each in result:
+            if each['name'] == name:
+                return each['%sid' % type]
     else:
         return 42
 
 
 ###Getting object id's###
 def isneedtocreate (name, type):
+    out = [0, False]
     if type == "template":
-        if exist_check(name, '%s.get' % type).json()['result'] != []:
-            id_template = getId(name, type)
-        else:
-            templ_create = True
+            if exist_check(name, '%s.get' % type).json()['result'] != []:
+                out[0] = getId(name, type)
+            else:
+                out[1] = True
+            return out
     elif type == "group":
-        if exist_check(name, 'host%s.get' % type).json()['result'] != []:
-            id_group = getId(name, type)
-        else:
-            group_create = True
+        temp = exist_check(name, 'host%s.get' % type).json()['result']
+        for each in temp:
+            if each['name'] == name:
+                out[0] = getId(name, type)
+            else:
+                out[1] = True
+            return out
     elif type == "host":
         if exist_check(name, '%s.get' % type).json()['result'] != []:
-            id_host = getId(name, type)
+            out[0] = getId(name, type)
         else:
-            host_create = True
+            out[1] = True
+        return out
     else:
         print("Name|Type error")
 
 
 ###Creation Host+Group+Template###
 
-def createhost(name, type):
+def createhost(name, type, assignhost=None, assigntogroup=None):
     """
     Void func for creating an object of <type> with <name>
     :param name: str of name
@@ -218,39 +274,43 @@ def createhost(name, type):
     :return: writes into host-create.log in current folder with timestamp
     """
     if type == "group":
-        if group_create:
-            create_something(name, "host%s.create" % type)
-            id_group = getId(name, type)
+        if isneedtocreate(name, type)[1]:
+            create_something(name, "host%s.create" % type, assignhost, assigntogroup)
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host group successfully created. \n" % name)
         else:
-            id_group = getId(name, type)
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "CloudHosts host group already exists. Nothing to do \n")
+        return readyid
     elif type == "host":
-        if host_create:
-            create_something(name, '%s.create' % type, unitip='111.111.11.12')
-            id_host = getId(name, type)
+        if isneedtocreate(name, type)[1]:
+            create_something(name, '%s.create' % type, group=assigntogroup, unitip='111.111.11.12')
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host successfully created. \n" % name)
         else:
-            id_host = getId(name, type)
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s host already exists. Nothing to do \n" % name)
+        return readyid
     elif type == "template":
-        if templ_create:
-            create_something(name, '%s.create' % type)
-            id_template = getId(name, type)
+        if isneedtocreate(name, type)[1]:
+            create_something(name, '%s.create' % type, group=assigntogroup)
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s template successfully created. \n" % name)
         else:
-            id_template = getId(name, type)
+            readyid = getId(name, type)
             with open("host-create.log", mode='a') as logfile:
                 logfile.write(DT + "%s template already exists. Nothing to do \n" % name)
+        return readyid
     else:
         print("Name|Type error")
 
 def mainstart (args):
+    assignsId = {'ToHost': None, 'ToGroup': None}
     if len(args) > 2:
         totype = args[2]
         if len(args) < 4:
@@ -260,14 +320,11 @@ def mainstart (args):
         todo = args[1]
         if todo == "create":
             if totype == "all":
-                isneedtocreate(toname, 'host')
-                isneedtocreate('CloudGroup', 'group')
-                isneedtocreate('CustomTemplate', 'template')
-                createhost(toname, 'host')
                 createhost('CloudGroup', 'group')
-                createhost('CustomTemplate', 'template')
+                assignsId['ToGroup'] = getId('CloudGroup', 'group')
+                createhost('CustomTemplate', 'template', assigntogroup=assignsId['ToGroup'])
+                createhost(toname, 'host', assigntogroup=assignsId['ToGroup'])
             else:
-                isneedtocreate(toname, type)
                 createhost(toname, type)
         elif todo == "delete":
             if totype == "group":
@@ -287,10 +344,23 @@ def mainstart (args):
                 type: host|group|template
                 name: any string value, defaul: current hostname""")
 
-mainstart(sys.argv)
+#mainstart(sys.argv)
+test = ['zabbix-task.py', 'create', 'all']
+mainstart(test)
 
-#hosttogroup(customid_host, id_group)
-#deletesomething("host.delete", id_host)
-#deletesomething("template.delete", id_template)
-#deletesomething("hostgroup.delete", id_group)
+"""
+createhost('CloudGroup', 'group')
+name = 'SomeTemplate'
+type = 'template'
+assignsId = {'ToHost': None, 'ToGroup': None}
+assignsId['ToGroup'] = getId('CloudGroup', 'group')
+print(isneedtocreate(name, type))
+print(exist_check(name, '%s.get' % type).json())
+print(createhost(name, type, assigntogroup=assignsId['ToGroup']))
+print(exist_check(name, "%s.get" % type).json()['result'])
+print(assignsId)
+print(getId(name, type))
+"""
+#deletesomething('hostgroup.delete', getId('CloudGroup', 'group'))
+
 
